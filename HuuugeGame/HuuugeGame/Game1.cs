@@ -14,7 +14,7 @@ namespace HuuugeGame
         StateManager manager;
 
         public Game1()
-        {
+        {           
             Globals.graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -33,6 +33,7 @@ namespace HuuugeGame
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
+            Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
 
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
@@ -40,7 +41,6 @@ namespace HuuugeGame
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
             //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
 
-            manager = new StateManager();
             base.Initialize();
         }
 
@@ -53,6 +53,7 @@ namespace HuuugeGame
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
+            manager = new StateManager();
             // TODO: use this.Content to load your game content here
         }
 
