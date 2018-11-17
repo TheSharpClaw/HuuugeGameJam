@@ -28,12 +28,14 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphics.PreferredBackBufferWidth = 800;
-            Globals.graphics.PreferredBackBufferHeight = 700;
+            Globals.graphics.PreferredBackBufferWidth = 700;
+            Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
             Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
+            Globals.hpBar = Content.Load<Texture2D>("textures/hp_bar_gray");
+            Globals.hpBar_green = Content.Load<Texture2D>("textures/hp_bar_white");
 
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");

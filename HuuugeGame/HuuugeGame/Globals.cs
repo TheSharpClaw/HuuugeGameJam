@@ -13,6 +13,9 @@ namespace HuuugeGame
         public static Texture2D tekstury_robimy_w_taki_sposób = null;
         public static Texture2D splashScreenLogo;
         public static Texture2D yellowButton;
+        public static Texture2D hpBar;
+        public static Texture2D hpBar_green;
+
 
         public static SpriteFont defaultFont;
 
