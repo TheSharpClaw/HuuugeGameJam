@@ -25,9 +25,11 @@ namespace HuuugeGame
 
         public static Texture2D spiderTexture;
         public static Texture2D spiderWebTexture;
-        public static enGameStates activeState = enGameStates.TEST;
+        public static enGameStates activeState = enGameStates.MENU;
         public static Texture2D motherFlyTexture { get; set; }
         public static Texture2D childrenFlyTexture { get; set; }
+
+        public static Boolean exit { get; set; }
 
         public static Random RandomBitches { get; set; } = new Random(1000);
 

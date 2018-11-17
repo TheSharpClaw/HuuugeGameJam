@@ -89,6 +89,10 @@ namespace HuuugeGame
 
         protected override void Draw(GameTime gameTime)
         {
+            if (Globals.exit)
+            {
+                this.Exit();
+            }
             base.Draw(gameTime);
         }
     }
