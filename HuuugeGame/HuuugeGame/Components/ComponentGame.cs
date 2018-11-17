@@ -13,7 +13,7 @@ namespace HuuugeGame
     class ComponentGame : StateTemplate, Behaviour.IComponent
     {
         private bool isLoaded = false;
-        
+        int counterTimer;
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
 
@@ -22,7 +22,7 @@ namespace HuuugeGame
         public void OnLoad()
         {
             DrawList.Add(new Spider(new Vector2(32, 32), new Vector2(100, 100), 3));
-
+            counterTimer = 0;
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
         }
@@ -56,7 +56,15 @@ namespace HuuugeGame
                 if (entity is Spider)
                     ourSpider = (Spider) entity;
             }
-
+            //counterTimer == 60 - upłynęła 1 sekunda
+            if (counterTimer++ > (60*5))
+            {
+                if (ourSpider.spiderWebPower < 90)
+                {
+                    ourSpider.spiderWebPower+=10;
+                }
+                counterTimer = 0;
+            }
             #region drawSpiderWebPower
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)ourSpider.Position.X-10, (int)ourSpider.Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
             Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle((int)ourSpider.Position.X-10, (int)ourSpider.Position.Y - 20, ourSpider.spiderWebPower/2, Globals.hpBar.Height), Color.White);
