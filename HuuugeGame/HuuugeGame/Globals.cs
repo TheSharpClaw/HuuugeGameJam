@@ -12,6 +12,7 @@ namespace HuuugeGame
     {
         public static Texture2D tekstury_robimy_w_taki_sposób = null;
         public static Texture2D splashScreenLogo;
+        public static Texture2D yellowButton;
 
         public static SpriteFont defaultFont;
 
@@ -28,7 +29,7 @@ namespace HuuugeGame
         public static Texture2D motherFlyTexture;
         public static Texture2D childrenFlyTexture;
 
-        public static enGameStates activeState = enGameStates.GAME;
+        public static enGameStates activeState = enGameStates.MENU;
         public enum enGameStates
         {
             SPLASH,

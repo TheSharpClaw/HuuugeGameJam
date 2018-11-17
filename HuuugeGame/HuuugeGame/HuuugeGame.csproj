@@ -44,6 +44,7 @@
     <Compile Include="Components\ComponentGame.cs" />
     <Compile Include="Components\ComponentMenu.cs" />
     <Compile Include="Components\ComponentSplash.cs" />
+    <Compile Include="Controls\Button.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
