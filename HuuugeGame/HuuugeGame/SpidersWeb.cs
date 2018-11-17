@@ -2,16 +2,22 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace HuuugeGame
 {
     class SpidersWeb : IEntity
     {
-        public SpidersWeb(Vector2 position, Vector2 size, int power)
+        List<SpidersWeb> _spiderWebList;
+        int _spiderWebLife;
+        public SpidersWeb(Vector2 position, Vector2 size, int power, List<SpidersWeb> spiderWebList)
         {
             Position = position;
             Size = size;
             Power = power;
+            _spiderWebList = spiderWebList;
+            _spiderWebLife = 60 * 8;
+                //60 * 8 = 8sekund
         }
 
         public Vector2 Position { get; set; }
@@ -28,7 +34,10 @@ namespace HuuugeGame
 
         public void Update()
         {
-            throw new NotImplementedException();
+            if (--_spiderWebLife==0)
+            {
+                _spiderWebList.Remove(this);
+            }
         }
     }
 }

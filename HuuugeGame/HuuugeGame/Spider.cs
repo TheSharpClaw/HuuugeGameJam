@@ -69,6 +69,10 @@ namespace HuuugeGame
             SpiderControls();
             SpiderCollision();
             oldKeyState = newKeyState;
+            for(int i=0;i<spiderWebList.Count;i++)
+            {
+                spiderWebList[i].Update();
+            }
         }
 
         public void SpiderControls()
@@ -163,7 +167,7 @@ namespace HuuugeGame
             {
                 if (spiderWebPower > 0)
                 {
-                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3,spiderWebList));
                     spiderWebPower -= 10;
                 }
             }
