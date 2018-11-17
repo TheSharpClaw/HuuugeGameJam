@@ -57,7 +57,7 @@ namespace HuuugeGame
                     ourSpider = (Spider) entity;
             }
             //counterTimer == 60 - upłynęła 1 sekunda
-            if (counterTimer++ > (60*5))
+            if (counterTimer++ > (60*3))
             {
                 if (ourSpider.spiderWebPower < 90)
                 {
