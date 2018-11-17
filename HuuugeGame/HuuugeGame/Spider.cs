@@ -78,7 +78,7 @@ namespace HuuugeGame
             #region webPlacing
             if (KeypressTest(Keys.LeftShift))
             {
-                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
             }
             #endregion
 
@@ -128,7 +128,7 @@ namespace HuuugeGame
             }
             #endregion
 
-
+        }
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
