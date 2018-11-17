@@ -33,10 +33,13 @@ namespace HuuugeGame
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
+
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test");
 
-
+            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
 
             base.Initialize();
         }
@@ -78,10 +81,6 @@ namespace HuuugeGame
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
 
