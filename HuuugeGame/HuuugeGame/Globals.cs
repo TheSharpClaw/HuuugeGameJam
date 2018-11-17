@@ -21,10 +21,12 @@ namespace HuuugeGame
 
         //TEXTURES
         public static Texture2D backgroundTexture;
+
         public static Texture2D spiderTexture;
         public static Texture2D spiderWebTexture;
-      
-        public static Texture2D MotherFlyTexture { get; set; }
+
+        public static Texture2D motherFlyTexture;
+        public static Texture2D childrenFlyTexture;
 
         public static enGameStates activeState = enGameStates.GAME;
         public enum enGameStates

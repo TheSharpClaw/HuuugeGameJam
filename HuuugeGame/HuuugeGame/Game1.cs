@@ -36,9 +36,12 @@ namespace HuuugeGame
 
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
+
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
-            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
+
+            Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
+            Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
 
             manager = new StateManager();
             base.Initialize();
