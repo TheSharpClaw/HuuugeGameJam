@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HuuugeGame.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,8 @@ namespace HuuugeGame
     {
         ComponentGame gameComponent = new ComponentGame();
         ComponentMenu menuComponent = new ComponentMenu();
-        public ComponentSplash splashComponent = new ComponentSplash();
+        ComponentSplash splashComponent = new ComponentSplash();
+        ComponentTest testComponent = new ComponentTest();
         public void Update()
         {
             //TU SIE DZIEJE INTERPRETACJA STANÓW
@@ -28,6 +30,10 @@ namespace HuuugeGame
                 case Globals.enGameStates.PAUSE:
                     break;
                 case Globals.enGameStates.EXIT:
+                    Globals.exit = true;
+                    break;
+                case Globals.enGameStates.TEST:
+                    testComponent.Update();
                     break;
             }
         }
