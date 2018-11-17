@@ -44,9 +44,9 @@
     <Compile Include="Components\ComponentGame.cs" />
     <Compile Include="Components\ComponentMenu.cs" />
     <Compile Include="Components\ComponentSplash.cs" />
-    <Compile Include="Content\Behaviour\Hive.cs" />
-    <Compile Include="Content\Behaviour\IEntity.cs" />
-    <Compile Include="Content\Behaviour\IMovable.cs" />
+    <Compile Include="Behaviour\Hive.cs" />
+    <Compile Include="Behaviour\IEntity.cs" />
+    <Compile Include="Behaviour\IMovable.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />

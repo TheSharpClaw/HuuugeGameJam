@@ -28,8 +28,11 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphics.PreferredBackBufferWidth = 100;
-            Globals.graphics.PreferredBackBufferHeight = 100;
+            Globals.graphics.PreferredBackBufferWidth = 500;
+            Globals.graphics.PreferredBackBufferHeight = 500;
+            Globals.graphics.ApplyChanges();
+
+            Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             base.Initialize();
         }
@@ -43,7 +46,6 @@ namespace HuuugeGame
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
-
             // TODO: use this.Content to load your game content here
         }
 
@@ -79,7 +81,9 @@ namespace HuuugeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0,0,500,500), Color.White);
+            Globals.spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
