@@ -11,7 +11,7 @@ namespace HuuugeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        StateManager manager = new StateManager();
+        StateManager manager;
 
         public Game1()
         {
@@ -34,6 +34,13 @@ namespace HuuugeGame
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
+            Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
+            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
+
+            manager = new StateManager();
             base.Initialize();
         }
 
@@ -74,18 +81,12 @@ namespace HuuugeGame
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            Globals.spriteBatch.Begin();
-            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0,0,500,500), Color.White);
-            Globals.spriteBatch.End();
-            // TODO: Add your drawing code here
 
+            GraphicsDevice.Clear(Color.CornflowerBlue);
+            // TODO: Add your drawing code here
+            manager.splashComponent.Draw();
             base.Draw(gameTime);
         }
     }
