@@ -16,7 +16,7 @@ namespace HuuugeGame
             Size = size;
             Position = position;
             Velocity = velocity;
-            spiderWebPower = 100;
+            spiderWebPower = 30;
         }
 
         public Vector2 Size { get; set; }
