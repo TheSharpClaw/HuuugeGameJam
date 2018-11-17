@@ -58,8 +58,8 @@ namespace HuuugeGame
             }
 
             #region drawSpiderWebPower
-            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle(100, 100, 100, Globals.hpBar.Height), Color.White);
-            Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle(100, 100, ourSpider.spiderWebPower, Globals.hpBar.Height), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)ourSpider.Position.X-10, (int)ourSpider.Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle((int)ourSpider.Position.X-10, (int)ourSpider.Position.Y - 20, ourSpider.spiderWebPower/2, Globals.hpBar.Height), Color.White);
             #endregion
 
             Globals.spriteBatch.End();
