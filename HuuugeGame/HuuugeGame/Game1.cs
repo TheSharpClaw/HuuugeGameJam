@@ -11,7 +11,7 @@ namespace HuuugeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        StateManager manager = new StateManager();
+        StateManager manager;
 
         public Game1()
         {
@@ -34,10 +34,10 @@ namespace HuuugeGame
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
-            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test");
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
 
 
-
+            manager = new StateManager();
             base.Initialize();
         }
 
