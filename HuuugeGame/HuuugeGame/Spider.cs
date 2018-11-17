@@ -33,7 +33,7 @@ namespace HuuugeGame
         public void Draw()
         {
             foreach (SpidersWeb web in spiderWebList)
-                Globals.spriteBatch.Draw(Globals.spiderWebTexture, web.Position, Color.White);
+                web.Draw();
 
             Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
                 null, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
