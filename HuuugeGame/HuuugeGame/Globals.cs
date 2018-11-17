@@ -10,8 +10,7 @@ namespace HuuugeGame
 {
     public static class Globals
     {
-        public static Texture2D tekstury_robimy_w_taki_sposób = null;
-        public static Texture2D splashScreenLogo;
+        public static bool exit = false;
 
         public static SpriteFont defaultFont;
 
@@ -19,7 +18,14 @@ namespace HuuugeGame
         public static GraphicsDeviceManager graphics = null;
         public static Vector2 screenSize;
 
+        public static Random RandomBitches { get; set; } = new Random(1000);
         //TEXTURES
+        public static Texture2D splashScreenLogo;
+
+        public static Texture2D hpBar;
+        public static Texture2D hpBar_white;
+        public static Texture2D yellowButton;
+
         public static Texture2D backgroundTexture;
 
         public static Texture2D spiderTexture;
@@ -36,6 +42,7 @@ namespace HuuugeGame
         public static Texture2D stone3Texture;
         public static Texture2D stone4Texture;
 
+
         public static enGameStates activeState = enGameStates.GAME;
         public enum enGameStates
         {
@@ -43,6 +50,7 @@ namespace HuuugeGame
             MENU,
             GAME,
             PAUSE,
+            TEST,
             EXIT
         }
 

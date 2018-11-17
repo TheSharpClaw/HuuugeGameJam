@@ -28,8 +28,8 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphics.PreferredBackBufferWidth = 500;
-            Globals.graphics.PreferredBackBufferHeight = 500;
+            Globals.graphics.PreferredBackBufferWidth = 700;
+            Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
@@ -39,6 +39,11 @@ namespace HuuugeGame
 
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+
+            Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
+
+            Globals.hpBar = Content.Load<Texture2D>("textures/hp_bar_gray");
+            Globals.hpBar_white = Content.Load<Texture2D>("textures/hp_bar_white");
 
             Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
             Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");

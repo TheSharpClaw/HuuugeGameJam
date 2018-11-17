@@ -43,7 +43,7 @@ namespace HuuugeGame
 
             #region drawSpiderWebPower
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
-            Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, spiderWebPower / 2, Globals.hpBar.Height), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar_white, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, spiderWebPower / 2, Globals.hpBar.Height), Color.White);
             #endregion
         }
 
