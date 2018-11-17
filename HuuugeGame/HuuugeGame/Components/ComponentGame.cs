@@ -18,6 +18,8 @@ namespace HuuugeGame
 
         }
 
+
+
         //OBLICZENIA
         public void Update()
         {
