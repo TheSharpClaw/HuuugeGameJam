@@ -78,7 +78,7 @@ namespace HuuugeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || Globals.exit)
                 Exit();
 
             manager.Update();
@@ -89,11 +89,7 @@ namespace HuuugeGame
 
         protected override void Draw(GameTime gameTime)
         {
-            if (Globals.exit)
-            {
-                this.Exit();
-            }
-            base.Draw(gameTime);
+          s  base.Draw(gameTime);
         }
     }
 }
