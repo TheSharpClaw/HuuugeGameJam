@@ -25,8 +25,6 @@ namespace HuuugeGame
         private float angle = 0;
         Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
 
-        private bool isSpaceFreeForWeb;
-
         KeyboardState oldKeyState;
         KeyboardState newKeyState;
 
@@ -51,7 +49,7 @@ namespace HuuugeGame
 
             newKeyState = Keyboard.GetState();
             SpiderControls();
-
+            SpiderCollision();
             oldKeyState = newKeyState;
         }
 
@@ -79,60 +77,53 @@ namespace HuuugeGame
             #region webPlacing
             if (KeypressTest(Keys.LeftShift))
             {
-                foreach (SpidersWeb web in spiderWebList)
-                {
-                    if (new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y).Intersects(
-                        new Rectangle((int)web.Position.X, (int)web.Position.Y, (int)web.Size.X, (int)web.Size.Y)))
-                    {
-                        isSpaceFreeForWeb = false;
-                    }
-                }
-                if (isSpaceFreeForWeb)
-                {
                     spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
-                }
-                else
-                {
-                    isSpaceFreeForWeb = true;
-                }
             }
-                #endregion
+            #endregion
 
-                #region spriteRotation
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    angle = (float)Math.PI * 1.75f;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    angle = (float)Math.PI * 0.25f;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    angle = (float)Math.PI * 1.25f;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    angle = (float)Math.PI * 0.75f;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.W))
-                {
-                    angle = 0;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                {
-                    angle = (float)Math.PI;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.A))
-                {
-                    angle = (float)Math.PI * 1.5f;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    angle = (float)Math.PI * 0.5f;
-                }
-                #endregion
-
+            #region spriteRotation
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.75f;
             }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.25f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.25f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.75f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                angle = 0;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                angle = (float)Math.PI;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.5f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.5f;
+            }
+            #endregion
+
+        }
+
+        public void SpiderCollision()
+        {
+            if (Position.X < 24) Position = new Vector2(24, Position.Y);
+            else if (Position.X + Size.X > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - Size.X, Position.Y);
+            if (Position.Y < 24) Position = new Vector2(Position.X, 24);
+            else if (Position.Y + Size.Y > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - Size.Y);
         }
     }
+}

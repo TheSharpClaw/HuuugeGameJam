@@ -45,9 +45,10 @@ namespace HuuugeGame
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
-            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            //Globals.graphics.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
 
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
             foreach (IEntity entity in DrawList)
                 entity.Draw();
 

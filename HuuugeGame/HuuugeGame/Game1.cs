@@ -28,8 +28,8 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphics.PreferredBackBufferWidth = 800;
-            Globals.graphics.PreferredBackBufferHeight = 700;
+            Globals.graphics.PreferredBackBufferWidth = 700;
+            Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
