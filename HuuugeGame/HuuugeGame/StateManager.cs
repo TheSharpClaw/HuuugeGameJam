@@ -30,6 +30,7 @@ namespace HuuugeGame
                 case Globals.enGameStates.PAUSE:
                     break;
                 case Globals.enGameStates.EXIT:
+                    Globals.exit = true;
                     break;
                 case Globals.enGameStates.TEST:
                     testComponent.Update();

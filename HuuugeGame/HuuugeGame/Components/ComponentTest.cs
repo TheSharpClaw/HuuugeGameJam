@@ -16,7 +16,7 @@ namespace HuuugeGame.Components
 
         public ComponentTest()
         {
-            DrawList.Add(new Hive(100));
+            DrawList.Add(new Hive(1000));
 
             UpdateList = DrawList;
         }
@@ -24,8 +24,9 @@ namespace HuuugeGame.Components
         public void Draw()
         {
             Globals.graphics.GraphicsDevice.Clear(Color.Black);
-            Globals.spriteBatch.Begin();
 
+            Globals.spriteBatch.Begin();
+            
             foreach (IEntity entity in DrawList)
                 entity.Draw();
 

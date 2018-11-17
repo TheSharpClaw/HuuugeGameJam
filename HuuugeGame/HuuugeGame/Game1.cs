@@ -11,7 +11,7 @@ namespace HuuugeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        StateManager manager = new StateManager();
+        StateManager manager;
 
         public Game1()
         {
@@ -28,12 +28,35 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Globals.graphics.PreferredBackBufferWidth = 500;
-            Globals.graphics.PreferredBackBufferHeight = 500;
+            Globals.graphics.PreferredBackBufferWidth = 700;
+            Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
+            Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
+
+            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+
+            Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
+
+            Globals.hpBar = Content.Load<Texture2D>("textures/hp_bar_gray");
+            Globals.hpBar_white = Content.Load<Texture2D>("textures/hp_bar_white");
+
+            Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
+            Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
+
+            Globals.flowerTexture = Content.Load<Texture2D>("textures/flower_texture");
+
+            Globals.stumpTexture = Content.Load<Texture2D>("textures/stump_texture");
+            Globals.stone1Texture = Content.Load<Texture2D>("textures/stone1_texture");
+            Globals.stone2Texture = Content.Load<Texture2D>("textures/stone2_texture");
+            Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
+            Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
+
+            manager = new StateManager();
             base.Initialize();
         }
 
@@ -45,8 +68,8 @@ namespace HuuugeGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
-            Globals.MotherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
-            Globals.ChildrenFlyTexture = Content.Load<Texture2D>("textures/childrenFly");
+            Globals.motherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
+            Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             // TODO: use this.Content to load your game content here
         }
@@ -76,12 +99,12 @@ namespace HuuugeGame
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+
+
+            // TODO: Add your drawing code here
+            //manager.splashComponent.Draw();
             base.Draw(gameTime);
         }
     }
