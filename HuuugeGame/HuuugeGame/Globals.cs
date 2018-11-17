@@ -10,8 +10,6 @@ namespace HuuugeGame
 {
     public static class Globals
     {
-        public static Texture2D tekstury_robimy_w_taki_sposób = null;
-
         public static SpriteBatch spriteBatch = null;
         public static GraphicsDeviceManager graphics = null;
         public static Vector2 screenSize;
@@ -19,12 +17,9 @@ namespace HuuugeGame
         //TEXTURES
         public static Texture2D backgroundTexture;
         public static Texture2D spiderTexture;
-
-
-        public static enGameStates activeState = enGameStates.SPLASH;
-
         public static Texture2D MotherFlyTexture { get; set; }
 
+        public static enGameStates activeState = enGameStates.SPLASH;
         public enum enGameStates
         {
             SPLASH,
