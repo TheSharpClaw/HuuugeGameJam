@@ -33,6 +33,7 @@ namespace HuuugeGame
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
+            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
 
             base.Initialize();
         }
