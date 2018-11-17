@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
@@ -12,12 +13,29 @@ namespace HuuugeGame
     {
         public Spider spider;
         private bool isLoaded = false;
+        private float angle = 0;
+        Vector2 location = new Vector2(400, 240);
+        Rectangle sourceRectangle;
+        Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
+
+
+        KeyboardState oldKeyState;
+        KeyboardState newKeyState;
+
+
+        private bool KeypressTest(Keys theKey)
+        {
+            if (newKeyState.IsKeyUp(theKey) && oldKeyState.IsKeyDown(theKey))
+                return true;
+            return false;
+        }
+
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
             Globals.spriteBatch.Begin();
             Globals.graphics.GraphicsDevice.Clear(Color.Black);
-            Globals.spriteBatch.Draw(Globals.spiderTexture, spider.Position, Color.White);
+            Globals.spriteBatch.Draw(Globals.spiderTexture, spider.Position, sourceRectangle, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
             Globals.spriteBatch.End();
         }
 
@@ -33,13 +51,15 @@ namespace HuuugeGame
             }
             SpiderControls();
 
+            oldKeyState = newKeyState;
             Draw();
         }
 
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
-            spider = new Spider(new Vector2(64, 64), new Vector2(100, 100), 3);
+            spider = new Spider(new Vector2(32, 32), new Vector2(100, 100), 3);
+            sourceRectangle = new Rectangle(0, 0, (int)spider.Size.X, (int)spider.Size.Y);
         }
 
         public void CheckCollisions()
@@ -69,7 +89,50 @@ namespace HuuugeGame
             }
             #endregion
 
-            //TODO: place web
+            #region spriteRotation
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.75f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.25f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.25f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.75f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                angle = 0;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                angle = (float)Math.PI;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                angle = (float)Math.PI * 1.5f;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                angle = (float)Math.PI * 0.5f;
+            }
+            #endregion
+
+            #region webPlacing
+            if (KeypressTest(Keys.Tab))
+            {
+
+            }
+            #endregion
+
+
+                //TODO: place web
         }
 
         public void ButterflyControls()
