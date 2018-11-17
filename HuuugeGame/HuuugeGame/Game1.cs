@@ -11,7 +11,7 @@ namespace HuuugeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        StateManager manager = new StateManager();
+        StateManager manager;
 
         public Game1()
         {
@@ -35,12 +35,12 @@ namespace HuuugeGame
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
-            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test");
-
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
             //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
 
+            manager = new StateManager();
             base.Initialize();
         }
 
