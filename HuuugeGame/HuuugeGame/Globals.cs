@@ -16,6 +16,10 @@ namespace HuuugeGame
         public static GraphicsDeviceManager graphics = null;
         public static Vector2 screenSize;
 
+        //TEXTURES
+        public static Texture2D backgroundTexture;
+
+
         public static enGameStates activeState = enGameStates.SPLASH;
 
         public static Texture2D MotherFlyTexture { get; set; }
