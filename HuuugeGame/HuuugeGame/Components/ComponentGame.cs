@@ -45,11 +45,20 @@ namespace HuuugeGame
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
+            Spider ourSpider = null;
             Globals.graphics.GraphicsDevice.Clear(Color.Black);
             Globals.spriteBatch.Begin();
-
             foreach (IEntity entity in DrawList)
+            {
                 entity.Draw();
+                if (entity is Spider)
+                    ourSpider = (Spider) entity;
+            }
+
+            #region drawSpiderWebPower
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle(100, 100, 100, Globals.hpBar.Height), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle(100, 100, ourSpider.spiderWebPower, Globals.hpBar.Height), Color.White);
+            #endregion
 
             Globals.spriteBatch.End();
         }

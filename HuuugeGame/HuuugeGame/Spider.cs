@@ -9,11 +9,13 @@ namespace HuuugeGame
 {
     class Spider : IEntity
     {
+        public int spiderWebPower;
         public Spider(Vector2 size, Vector2 position, int velocity)
         {
             Size = size;
             Position = position;
             Velocity = velocity;
+            spiderWebPower = 100;
         }
 
         public Vector2 Size { get; set; }
@@ -47,8 +49,7 @@ namespace HuuugeGame
         }
 
         public void Update()
-        {
-
+        {  
             newKeyState = Keyboard.GetState();
             SpiderControls();
 
@@ -114,7 +115,11 @@ namespace HuuugeGame
             #region webPlacing
             if (KeypressTest(Keys.Tab))
             {
-                spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                if (spiderWebPower > 0)
+                {
+                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                    spiderWebPower -= 10;
+                }
             }
             #endregion
 
