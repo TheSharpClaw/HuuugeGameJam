@@ -14,6 +14,7 @@ namespace HuuugeGame
 
         public static SpriteBatch spriteBatch = null;
         public static GraphicsDeviceManager graphics = null;
+        public static Vector2 screenSize;
 
         public static enGameStates activeState;
         public enum enGameStates

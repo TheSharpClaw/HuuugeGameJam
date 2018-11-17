@@ -10,6 +10,5 @@ namespace HuuugeGame
     {
         void Update();
         void Draw();
-        void OnLoad();
     }
 }

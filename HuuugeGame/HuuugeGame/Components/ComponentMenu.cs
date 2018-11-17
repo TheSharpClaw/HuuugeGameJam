@@ -13,11 +13,6 @@ namespace HuuugeGame
             throw new NotImplementedException();
         }
 
-        public void OnLoad()
-        {
-            throw new NotImplementedException();
-        }
-
         public void Update()
         {
             throw new NotImplementedException();

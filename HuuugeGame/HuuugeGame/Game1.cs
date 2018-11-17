@@ -27,6 +27,8 @@ namespace HuuugeGame
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            Globals.graphics.PreferredBackBufferWidth = 100;
+            Globals.graphics.PreferredBackBufferHeight = 100;
 
             base.Initialize();
         }
@@ -39,6 +41,7 @@ namespace HuuugeGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
 
             // TODO: use this.Content to load your game content here
         }
