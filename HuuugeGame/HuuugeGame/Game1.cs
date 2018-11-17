@@ -45,7 +45,8 @@ namespace HuuugeGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
-            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
+            Globals.MotherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
+            Globals.ChildrenFlyTexture = Content.Load<Texture2D>("textures/childrenFly");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             // TODO: use this.Content to load your game content here
         }
@@ -81,12 +82,6 @@ namespace HuuugeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-            Globals.spriteBatch.Begin();
-            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0,0,500,500), Color.White);
-            Globals.spriteBatch.End();
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
     }

@@ -13,5 +13,8 @@ namespace HuuugeGame.Content.Behaviour
         Vector2 Position { get; set; }
 
         Texture2D Texture { get; set; }
+
+        void Update();
+        void Draw();
     }
 }

@@ -18,11 +18,13 @@ namespace HuuugeGame
 
         //TEXTURES
         public static Texture2D backgroundTexture;
-
-
-        public static enGameStates activeState = enGameStates.SPLASH;
+        
+        public static enGameStates activeState = enGameStates.TEST;
 
         public static Texture2D MotherFlyTexture { get; set; }
+        public static Texture2D ChildrenFlyTexture { get; set; }
+
+        public static Random RandomBitches { get; set; } = new Random(1000);
 
         public enum enGameStates
         {
@@ -30,7 +32,8 @@ namespace HuuugeGame
             MENU,
             GAME,
             PAUSE,
-            EXIT
+            EXIT,
+            TEST
         }
 
     }
