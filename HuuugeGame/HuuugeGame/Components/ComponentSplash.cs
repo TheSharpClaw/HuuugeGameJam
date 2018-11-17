@@ -34,7 +34,7 @@ namespace HuuugeGame
             {
                 Globals.activeState = Globals.enGameStates.MENU;
             }
-            if (i++ >= 60) alpha += 3;
+            if (i++ >= 100) alpha += 3;
             Draw();
         }
     }
