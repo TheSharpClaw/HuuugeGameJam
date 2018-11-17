@@ -20,12 +20,12 @@ namespace HuuugeGame
         public int Velocity { get; set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; }
-        
-        public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
 
+        public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
-        
         Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
+
+        private bool isSpaceFreeForWeb;
 
         KeyboardState oldKeyState;
         KeyboardState newKeyState;
@@ -76,50 +76,63 @@ namespace HuuugeGame
             }
             #endregion
 
-            #region spriteRotation
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.75f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.25f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.25f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.75f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                angle = 0;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                angle = (float)Math.PI;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.5f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.5f;
-            }
-            #endregion
-
             #region webPlacing
-            if (KeypressTest(Keys.Tab))
+            if (KeypressTest(Keys.LeftShift))
             {
-                spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                foreach (SpidersWeb web in spiderWebList)
+                {
+                    if (new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y).Intersects(
+                        new Rectangle((int)web.Position.X, (int)web.Position.Y, (int)web.Size.X, (int)web.Size.Y)))
+                    {
+                        isSpaceFreeForWeb = false;
+                    }
+                }
+                if (isSpaceFreeForWeb)
+                {
+                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                }
+                else
+                {
+                    isSpaceFreeForWeb = true;
+                }
             }
-            #endregion
+                #endregion
 
+                #region spriteRotation
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    angle = (float)Math.PI * 1.75f;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    angle = (float)Math.PI * 0.25f;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    angle = (float)Math.PI * 1.25f;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    angle = (float)Math.PI * 0.75f;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.W))
+                {
+                    angle = 0;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.S))
+                {
+                    angle = (float)Math.PI;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    angle = (float)Math.PI * 1.5f;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    angle = (float)Math.PI * 0.5f;
+                }
+                #endregion
 
-            //TODO: place web
+            }
         }
     }
-}
