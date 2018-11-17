@@ -15,22 +15,23 @@ namespace HuuugeGame
         private List<Button> _buttons;
         private Button newGameButton,quitGameButton;
         int currently_selected;
-
+        const int buttons_count = 2;
         //UWAGA TEN STATE JEST RAKIEM, NIE ZAGŁĘBIAJ SIĘ TUTAJ
 
         public ComponentMenu()
         {
             currently_selected = 0;
             float middleX = (Globals.screenSize.X - Globals.yellowButton.Width) / 2;
+            float posY = (Globals.screenSize.Y - (Globals.yellowButton.Height*buttons_count)-(50*buttons_count-1) ) / 2;
             newGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "NewGame")
             {
-                Position = new Vector2(middleX, 100),
+                Position = new Vector2(middleX, posY),
                 Text = "New Game",
             };
             newGameButton.Click += NewGameButton_Click;
             quitGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "Quit")
             {
-                Position = new Vector2(middleX, newGameButton.Position.Y+Globals.yellowButton.Height+100),
+                Position = new Vector2(middleX, newGameButton.Position.Y+Globals.yellowButton.Height+50),
                 Text = "Quit",
             };
             quitGameButton.Click += QuitGameButton_Click;
