@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using HuuugeGame.Content.Behaviour;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -9,43 +10,22 @@ using System.Threading.Tasks;
 
 namespace HuuugeGame
 {
-    class ComponentGame : StateTemplate
+    class ComponentGame : StateTemplate, Behaviour.IComponent
     {
-        public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
-        public Spider spider;
         private bool isLoaded = false;
-        private float angle = 0;
-        Vector2 location = new Vector2(400, 240);
-        Rectangle sourceRectangle;
-        Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
-        //Vector2 origin = new Vector2(0, 0);
-
-        KeyboardState oldKeyState;
-        KeyboardState newKeyState;
+        
+        public List<IEntity> DrawList { get; set; } = new List<IEntity>();
+        public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
 
 
-        private bool KeypressTest(Keys theKey)
+        //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
+        public void OnLoad()
         {
-            if (oldKeyState.IsKeyUp(theKey) && newKeyState.IsKeyDown(theKey))
-                return true;
-            return false;
+            DrawList.Add(new Spider(new Vector2(32, 32), new Vector2(100, 100), 3));
+
+            //HACK: Do rozróżnienia?
+            UpdateList = DrawList;
         }
-
-        //RYSOWANIE NA EKRANIE
-        public void Draw()
-        {
-            Globals.spriteBatch.Begin();
-            Globals.graphics.GraphicsDevice.Clear(Color.Black);
-            foreach (SpidersWeb web in spiderWebList)
-            {
-                Globals.spriteBatch.Draw(Globals.spiderWebTexture, web.Position, Color.White);
-            }
-            Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(spider.Position.X + spider.Size.X / 2, spider.Position.Y + spider.Size.Y / 2),
-                null, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
-            Globals.spriteBatch.End();
-        }
-
-
 
         //OBLICZENIA
         public void Update()
@@ -55,96 +35,23 @@ namespace HuuugeGame
                 OnLoad();
                 isLoaded = true;
             }
-            newKeyState = Keyboard.GetState();
-            SpiderControls();
 
-            oldKeyState = newKeyState;
+            foreach (IEntity entity in UpdateList)
+                entity.Update();
+
             Draw();
         }
 
-        //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
-        public void OnLoad()
+        //RYSOWANIE NA EKRANIE
+        public void Draw()
         {
-            spider = new Spider(new Vector2(32, 32), new Vector2(100, 100), 3);
-            sourceRectangle = new Rectangle(0, 0, (int)spider.Size.X, (int)spider.Size.Y);
-        }
+            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            Globals.spriteBatch.Begin();
 
-        public void CheckCollisions()
-        {
-            //TODO: butterfly -> spider
-            //TODO: butterfly -> web
-        }
+            foreach (IEntity entity in DrawList)
+                entity.Draw();
 
-        public void SpiderControls()
-        {
-            #region movement
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                spider.Position = new Vector2(spider.Position.X, spider.Position.Y - spider.Velocity);
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                spider.Position = new Vector2(spider.Position.X, spider.Position.Y + spider.Velocity);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                spider.Position = new Vector2(spider.Position.X - spider.Velocity, spider.Position.Y);
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                spider.Position = new Vector2(spider.Position.X + spider.Velocity, spider.Position.Y);
-            }
-            #endregion
-
-            #region spriteRotation
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.75f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.25f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.25f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.75f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                angle = 0;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                angle = (float)Math.PI;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                angle = (float)Math.PI * 1.5f;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                angle = (float)Math.PI * 0.5f;
-            }
-            #endregion
-
-            #region webPlacing
-            if (KeypressTest(Keys.Tab))
-            {
-                spiderWebList.Add(new SpidersWeb(spider.Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
-            }
-            #endregion
-
-
-            //TODO: place web
-        }
-
-        public void ButterflyControls()
-        {
-            //TODO: movement
+            Globals.spriteBatch.End();
         }
     }
 }

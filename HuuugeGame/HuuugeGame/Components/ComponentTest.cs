@@ -16,7 +16,7 @@ namespace HuuugeGame.Components
 
         public ComponentTest()
         {
-            DrawList.Add(new Hive(100));
+            DrawList.Add(new Hive(1000));
 
             UpdateList = DrawList;
         }
