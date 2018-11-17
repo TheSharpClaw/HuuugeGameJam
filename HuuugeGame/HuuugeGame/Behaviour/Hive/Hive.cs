@@ -1,5 +1,4 @@
 ﻿using HuuugeGame.Content.Behaviour;
-using HuuugeGame.Content.Model;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace HuuugeGame.Behaviour.Hive
 {
-    class Hive : IEntity, IMovable
+    class Hive : IEntity
     {
         public Vector2 Position { get; set; } = new Vector2(200, 200);
-        public Texture2D Texture { get; set; } = Globals.MotherFlyTexture;
+        public Texture2D Texture { get; set; } = Globals.motherFlyTexture;
 
         public List<ChildrenFly> ChildrenFlies { get; set; } = new List<ChildrenFly>();
 
@@ -31,7 +30,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Draw()
         {
-            Globals.spriteBatch.Draw(Globals.MotherFlyTexture, Position, Color.White);
+            Globals.spriteBatch.Draw(Globals.motherFlyTexture, Position, Color.White);
 
             foreach (ChildrenFly fly in ChildrenFlies)
                 fly.Draw();

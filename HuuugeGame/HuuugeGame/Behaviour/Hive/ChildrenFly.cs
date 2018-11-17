@@ -79,7 +79,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Draw()
         {
-            Globals.spriteBatch.Draw(Globals.ChildrenFlyTexture, Position, Color.White);
+            Globals.spriteBatch.Draw(Globals.childrenFlyTexture, Position, Color.White);
         }
     }
 }

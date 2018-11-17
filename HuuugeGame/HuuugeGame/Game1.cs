@@ -55,8 +55,8 @@ namespace HuuugeGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
-            Globals.MotherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
-            Globals.ChildrenFlyTexture = Content.Load<Texture2D>("textures/childrenFly");
+            Globals.motherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
+            Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/childrenFly");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             manager = new StateManager();
             // TODO: use this.Content to load your game content here

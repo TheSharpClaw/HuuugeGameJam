@@ -48,7 +48,6 @@
     <Compile Include="Components\ComponentMenu.cs" />
     <Compile Include="Components\ComponentSplash.cs" />
     <Compile Include="Behaviour\IEntity.cs" />
-    <Compile Include="Behaviour\IMovable.cs" />
     <Compile Include="Components\ComponentTest.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Game1.cs" />
