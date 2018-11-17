@@ -16,9 +16,9 @@ namespace HuuugeGame.Behaviour.Hive
 
         private Hive hive;
 
-        private Directions lastDirection { get; set; } = Directions.None;
+        private Direction choose { get; set; } = Direction.None;
 
-        enum Directions
+        enum Direction
         {
             None,
             North,
@@ -31,50 +31,66 @@ namespace HuuugeGame.Behaviour.Hive
             NorthWest
         }
 
-        private Vector2 NextDirections()
+        private Vector2 GetVectorFromDirection(Direction direction)
         {
-            var directions = Enum.GetValues(typeof(Directions)).Cast<Directions>().ToList();
-
-            directions.Remove(Directions.None);
-            directions.Remove(lastDirection);
-
-            lastDirection = directions[Globals.RandomBitches.Next(0, 7)];
-
-            switch (lastDirection)
+            switch (direction)
             {
-                case Directions.None:
-                    return new Vector2(0,0);
-                case Directions.North:
+                case Direction.North:
                     return new Vector2(-2, 0);
-                case Directions.NorthEast:
+                case Direction.NorthEast:
                     return new Vector2(-2, 2);
-                case Directions.East:
+                case Direction.East:
                     return new Vector2(0, 2);
-                case Directions.SouthEast:
+                case Direction.SouthEast:
                     return new Vector2(2, 2);
-                case Directions.South:
+                case Direction.South:
                     return new Vector2(2, 0);
-                case Directions.SouthWest:
+                case Direction.SouthWest:
                     return new Vector2(2, -2);
-                case Directions.West:
+                case Direction.West:
                     return new Vector2(0, -2);
-                case Directions.NorthWest:
+                case Direction.NorthWest:
                     return new Vector2(-2, -2);
                 default:
-                    throw new NotImplementedException();
+                    return new Vector2(0, 0);
+            }
+        }
+
+        private Vector2 NextDirection()
+        {
+            var directions = Enum.GetValues(typeof(Direction)).Cast<Direction>().ToList();
+
+            var distance = Vector2.Distance(Position, hive.Position);
+
+            directions.Remove(Direction.None);
+            directions.Remove(choose);
+
+            while (true)
+            {
+                choose = directions[Globals.RandomBitches.Next(0, directions.Count)];
+
+                var resultVector = Position + GetVectorFromDirection(choose);
+                var resultDistance = Vector2.Distance(resultVector, hive.Position);
+                
+                if (!((distance > hive.maxRadious && resultDistance >= distance) || (distance < hive.minRadious && resultDistance <= distance)))
+                {
+                    return resultVector;
+                }
+
+                directions.Remove(choose);
             }
         }
 
         public ChildrenFly(Hive hive)
         {
             this.hive = hive;
-            
+
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
         }
 
         public void Update()
         {
-            Position += NextDirections();
+            Position = NextDirection();
         }
 
         public void Draw()

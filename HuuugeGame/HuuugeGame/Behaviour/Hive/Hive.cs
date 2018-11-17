@@ -14,6 +14,10 @@ namespace HuuugeGame.Behaviour.Hive
         public Vector2 Position { get; set; } = new Vector2(200, 200);
         public Texture2D Texture { get; set; } = Globals.motherFlyTexture;
 
+        public int minRadious { get; } = 30;
+
+        public int maxRadious { get => 45 + ChildrenFlies.Count / 10; }
+
         public List<ChildrenFly> ChildrenFlies { get; set; } = new List<ChildrenFly>();
 
         public Hive(int offsprings = 0)
