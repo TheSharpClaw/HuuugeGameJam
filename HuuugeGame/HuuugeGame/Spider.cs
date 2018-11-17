@@ -36,7 +36,7 @@ namespace HuuugeGame
                 web.Draw();
 
             Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
-                null, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+                null, Color.Cyan, angle, origin, 1.0f, SpriteEffects.None, 1);
         }
 
         private bool KeypressTest(Keys theKey)
