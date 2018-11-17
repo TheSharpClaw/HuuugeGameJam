@@ -16,6 +16,18 @@ namespace HuuugeGame.Behaviour.Hive
 
         private Hive hive;
 
+        private Color childColor;
+        private static Color[] ColorsArray =
+        {
+            Color.LawnGreen,
+            Color.Red,
+            Color.Magenta,
+            Color.CornflowerBlue,
+            Color.Yellow,
+            Color.HotPink,
+            Color.OrangeRed
+        };
+
         private Direction choose { get; set; } = Direction.None;
 
         enum Direction
@@ -85,6 +97,8 @@ namespace HuuugeGame.Behaviour.Hive
         {
             this.hive = hive;
 
+            childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
+
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
         }
 
@@ -95,7 +109,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Draw()
         {
-            Globals.spriteBatch.Draw(Globals.childrenFlyTexture, Position, Color.White);
+            Globals.spriteBatch.Draw(Globals.childrenFlyTexture, Position, childColor);
         }
     }
 }
