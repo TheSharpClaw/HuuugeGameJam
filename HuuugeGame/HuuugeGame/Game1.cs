@@ -35,6 +35,7 @@ namespace HuuugeGame
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
 
             base.Initialize();
         }
@@ -47,7 +48,6 @@ namespace HuuugeGame
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
-            //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             // TODO: use this.Content to load your game content here
         }
