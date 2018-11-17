@@ -35,7 +35,7 @@ namespace HuuugeGame
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
-            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test2");
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/splash_logo");
 
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
@@ -56,7 +56,7 @@ namespace HuuugeGame
             Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
             Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
 
-            manager = new StateManager();
+            
             base.Initialize();
         }
 
@@ -72,6 +72,7 @@ namespace HuuugeGame
             Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             // TODO: use this.Content to load your game content here
+            manager = new StateManager();
         }
 
         /// <summary>
