@@ -8,17 +8,16 @@ namespace HuuugeGame
 {
     class ComponentGame : StateTemplate
     {
+        //RYSOWANIE NA EKRANIE
         public void Draw()
         {
-            //RYSOWANIE NA EKRANIE
             throw new NotImplementedException();
         }
 
+        //OBLICZENIA
         public void Update()
         {
-            //OBLICZENIA
             Draw();
-            throw new NotImplementedException();
         }
     }
 }

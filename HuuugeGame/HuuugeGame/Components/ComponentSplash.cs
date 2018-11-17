@@ -11,14 +11,14 @@ namespace HuuugeGame
         public void Draw()
         {
             //RYSOWANIE NA EKRANIE
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public void Update()
         {
             //OBLICZENIA
             Draw();
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }
