@@ -11,13 +11,33 @@ namespace HuuugeGame
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
-            throw new NotImplementedException();
+
         }
 
         //OBLICZENIA
         public void Update()
         {
+
+
             Draw();
+        }
+
+
+        public void CheckCollisions()
+        {
+            //TODO: butterfly -> spider
+            //TODO: butterfly -> web
+        }
+
+        public void SpiderControls()
+        {
+            //TODO: movement
+            //TODO: place web
+        }
+
+        public void ButterflyControls()
+        {
+            //TODO: movement
         }
     }
 }
