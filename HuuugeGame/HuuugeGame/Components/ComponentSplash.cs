@@ -12,11 +12,9 @@ namespace HuuugeGame
         Vector2 logoPosition;
         public ComponentSplash()
         {
-            float middleX = ((Globals.screenSize.X - Globals.splashScreenLogo.Width)/2);
-            //float middleX = 150;       
-           float middleY = ((Globals.screenSize.Y - Globals.splashScreenLogo.Height)/2);
-           // float middleY = 150;
-      
+            float middleX = ((Globals.screenSize.X - Globals.splashScreenLogo.Width) / 2);
+            float middleY = ((Globals.screenSize.Y - Globals.splashScreenLogo.Height) / 2);
+
             logoPosition = new Vector2(middleX, middleY);
         }
         public void Draw()
