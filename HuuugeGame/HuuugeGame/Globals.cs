@@ -28,6 +28,14 @@ namespace HuuugeGame
         public static Texture2D motherFlyTexture;
         public static Texture2D childrenFlyTexture;
 
+        public static Texture2D flowerTexture;
+
+        public static Texture2D stumpTexture;
+        public static Texture2D stone1Texture;
+        public static Texture2D stone2Texture;
+        public static Texture2D stone3Texture;
+        public static Texture2D stone4Texture;
+
         public static enGameStates activeState = enGameStates.GAME;
         public enum enGameStates
         {

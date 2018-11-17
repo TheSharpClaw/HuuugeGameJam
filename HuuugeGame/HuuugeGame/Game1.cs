@@ -43,6 +43,14 @@ namespace HuuugeGame
             Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
             Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
 
+            Globals.flowerTexture = Content.Load<Texture2D>("textures/flower_texture");
+
+            Globals.stumpTexture = Content.Load<Texture2D>("textures/stump_texture");
+            Globals.stone1Texture = Content.Load<Texture2D>("textures/stone1_texture");
+            Globals.stone2Texture = Content.Load<Texture2D>("textures/stone2_texture");
+            Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
+            Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
+
             manager = new StateManager();
             base.Initialize();
         }
