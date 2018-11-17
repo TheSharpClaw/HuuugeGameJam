@@ -33,7 +33,7 @@ namespace HuuugeGame
         public void Update()
         {
             //OBLICZENIA
-            //Draw();
+            Draw();
         }
     }
 }

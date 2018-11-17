@@ -26,7 +26,7 @@ namespace HuuugeGame
       
         public static Texture2D MotherFlyTexture { get; set; }
 
-        public static enGameStates activeState = enGameStates.SPLASH;
+        public static enGameStates activeState = enGameStates.GAME;
         public enum enGameStates
         {
             SPLASH,

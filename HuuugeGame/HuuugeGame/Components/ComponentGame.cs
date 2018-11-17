@@ -11,11 +11,14 @@ namespace HuuugeGame
     class ComponentGame : StateTemplate
     {
         public Spider spider;
-
+        private bool isLoaded = false;
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
-            throw new NotImplementedException();
+            Globals.spriteBatch.Begin();
+            Globals.graphics.GraphicsDevice.Clear(Color.Black);
+            Globals.spriteBatch.Draw(Globals.spiderTexture, spider.Position, Color.White);
+            Globals.spriteBatch.End();
         }
 
 
@@ -23,7 +26,12 @@ namespace HuuugeGame
         //OBLICZENIA
         public void Update()
         {
-
+            if (!isLoaded)
+            {
+                OnLoad();
+                isLoaded = true;
+            }
+            SpiderControls();
 
             Draw();
         }
@@ -31,7 +39,7 @@ namespace HuuugeGame
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
-            spider = new Spider(new Vector2(64, 64), 3);
+            spider = new Spider(new Vector2(64, 64), new Vector2(100, 100), 3);
         }
 
         public void CheckCollisions()
@@ -42,20 +50,25 @@ namespace HuuugeGame
 
         public void SpiderControls()
         {
+            #region movement
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                //TODO: move up
-            }else if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                //TODO: move down
-            }else if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                //TODO: move left
-            }else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                //TODO: move right
+                spider.Position = new Vector2(spider.Position.X, spider.Position.Y - spider.Velocity);
             }
-            //TODO: movement
+            else if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                spider.Position = new Vector2(spider.Position.X, spider.Position.Y + spider.Velocity);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                spider.Position = new Vector2(spider.Position.X - spider.Velocity, spider.Position.Y);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                spider.Position = new Vector2(spider.Position.X + spider.Velocity, spider.Position.Y);
+            }
+            #endregion
+
             //TODO: place web
         }
 
