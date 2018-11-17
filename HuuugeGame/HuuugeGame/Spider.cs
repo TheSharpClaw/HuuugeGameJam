@@ -142,6 +142,17 @@ namespace HuuugeGame
                 }
             }
 
+
+            #region webPlacing
+            if (KeypressTest(Keys.LeftShift))
+            {
+                if (spiderWebPower > 0)
+                {
+                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                    spiderWebPower -= 10;
+                }
+            }
+            #endregion
         }
         public void SpiderCollision()
         {
