@@ -32,6 +32,7 @@ namespace HuuugeGame
             Globals.graphics.PreferredBackBufferHeight = 500;
             Globals.graphics.ApplyChanges();
 
+            Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             base.Initialize();
         }
@@ -80,7 +81,9 @@ namespace HuuugeGame
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0,0,500,500), Color.White);
+            Globals.spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);

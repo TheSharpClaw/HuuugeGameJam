@@ -13,18 +13,15 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Behaviour/Hive.cs
-/importer:
-/processor:
-/build:Behaviour/Hive.cs
-
-#begin Behaviour/IEntity.cs
-/importer:
-/processor:
-/build:Behaviour/IEntity.cs
-
-#begin Behaviour/IMovable.cs
-/importer:
-/processor:
-/build:Behaviour/IMovable.cs
+#begin textures/background_texture.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:textures/background_texture.png
 
