@@ -10,7 +10,7 @@ namespace HuuugeGame
     {
         ComponentGame gameComponent = new ComponentGame();
         ComponentMenu menuComponent = new ComponentMenu();
-        ComponentSplash splashComponent = new ComponentSplash();
+        public ComponentSplash splashComponent = new ComponentSplash();
         public void Update()
         {
             //TU SIE DZIEJE INTERPRETACJA STANÓW
