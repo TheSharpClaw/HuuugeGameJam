@@ -78,7 +78,11 @@ namespace HuuugeGame
             #region webPlacing
             if (KeypressTest(Keys.LeftShift))
             {
-                spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                if (spiderWebPower > 0)
+                {
+                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
+                    spiderWebPower -= 10;
+                }
             }
             #endregion
 
@@ -115,18 +119,7 @@ namespace HuuugeGame
             {
                 angle = (float)Math.PI * 0.5f;
             }
-            #endregion
-
-            #region webPlacing
-            if (KeypressTest(Keys.Tab))
-            {
-                if (spiderWebPower > 0)
-                {
-                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3));
-                    spiderWebPower -= 10;
-                }
-            }
-            #endregion
+            #endregion    
 
         }
         public void SpiderCollision()
