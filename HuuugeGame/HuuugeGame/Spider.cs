@@ -39,7 +39,7 @@ namespace HuuugeGame
                 web.Draw();
 
             Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
-                null, Color.Cyan, angle, origin, 1.0f, SpriteEffects.None, 1);
+                null, Color.Black, angle, origin, 1.0f, SpriteEffects.None, 1);
 
             #region drawSpiderWebPower
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
