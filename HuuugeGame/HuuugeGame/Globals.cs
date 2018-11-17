@@ -28,7 +28,7 @@ namespace HuuugeGame
 
         public static Texture2D spiderTexture;
         public static Texture2D spiderWebTexture;
-        public static enGameStates activeState = enGameStates.SPLASH;
+        public static enGameStates activeState = enGameStates.GAME;
         public static Texture2D motherFlyTexture { get; set; }
         public static Texture2D childrenFlyTexture { get; set; }
 

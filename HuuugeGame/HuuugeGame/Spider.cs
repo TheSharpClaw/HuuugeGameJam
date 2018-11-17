@@ -19,6 +19,7 @@ namespace HuuugeGame
             spiderWebPower = 30;
         }
 
+        int counterTimer = 0;
         public Vector2 Size { get; set; }
         public int Velocity { get; set; }
         public Vector2 Position { get; set; }
@@ -39,6 +40,11 @@ namespace HuuugeGame
 
             Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
                 null, Color.Cyan, angle, origin, 1.0f, SpriteEffects.None, 1);
+
+            #region drawSpiderWebPower
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar_green, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, spiderWebPower / 2, Globals.hpBar.Height), Color.White);
+            #endregion
         }
 
         private bool KeypressTest(Keys theKey)
@@ -49,7 +55,16 @@ namespace HuuugeGame
         }
 
         public void Update()
-        {  
+        {
+            //counterTimer == 60 - upłynęła 1 sekunda
+            if (counterTimer++ > (60 * 2))
+            {
+                if (spiderWebPower < 90)
+                {
+                    spiderWebPower += 10;
+                }
+                counterTimer = 0;
+            }
             newKeyState = Keyboard.GetState();
             SpiderControls();
             SpiderCollision();
@@ -154,6 +169,7 @@ namespace HuuugeGame
             }
             #endregion
         }
+
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);

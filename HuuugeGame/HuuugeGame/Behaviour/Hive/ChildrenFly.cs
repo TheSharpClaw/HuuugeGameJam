@@ -60,7 +60,7 @@ namespace HuuugeGame.Behaviour.Hive
         {
             var directions = Enum.GetValues(typeof(Direction)).Cast<Direction>().ToList();
 
-            var distance = Vector2.Distance(Position, hive.Position);
+            var distance = Vector2.Distance(Position, hive.Center);
 
             directions.Remove(Direction.None);
             directions.Remove(choose);
@@ -70,7 +70,7 @@ namespace HuuugeGame.Behaviour.Hive
                 choose = directions[Globals.RandomBitches.Next(0, directions.Count)];
 
                 var resultVector = Position + GetVectorFromDirection(choose);
-                var resultDistance = Vector2.Distance(resultVector, hive.Position);
+                var resultDistance = Vector2.Distance(resultVector, hive.Center);
                 
                 if (!((distance > hive.maxRadious && resultDistance >= distance) || (distance < hive.minRadious && resultDistance <= distance)))
                 {
