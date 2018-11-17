@@ -89,7 +89,7 @@ namespace HuuugeGame
 
         protected override void Draw(GameTime gameTime)
         {
-          s  base.Draw(gameTime);
+          base.Draw(gameTime);
         }
     }
 }
