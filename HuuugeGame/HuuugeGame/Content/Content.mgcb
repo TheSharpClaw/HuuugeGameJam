@@ -13,18 +13,3 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Behaviour/Hive.cs
-/importer:
-/processor:
-/build:Behaviour/Hive.cs
-
-#begin Behaviour/IEntity.cs
-/importer:
-/processor:
-/build:Behaviour/IEntity.cs
-
-#begin Behaviour/IMovable.cs
-/importer:
-/processor:
-/build:Behaviour/IMovable.cs
-

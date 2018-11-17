@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuuugeGame.Content.Model
+namespace HuuugeGame.Content.Behaviour.Hive
 {
-    class Hive
+    class MotherFly
     {
-
     }
 }
