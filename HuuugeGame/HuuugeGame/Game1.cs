@@ -33,10 +33,6 @@ namespace HuuugeGame
             Globals.graphics.ApplyChanges();
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
-            Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
-            Globals.splashScreenLogo = Content.Load<Texture2D>("images/logo_test");
-
-
 
             base.Initialize();
         }
@@ -84,10 +80,12 @@ namespace HuuugeGame
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0,0,500,500), Color.White);
+            Globals.spriteBatch.End();
             // TODO: Add your drawing code here
-            manager.splashComponent.Draw();
+
             base.Draw(gameTime);
         }
     }

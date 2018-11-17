@@ -11,9 +11,7 @@ namespace HuuugeGame
         //RYSOWANIE NA EKRANIE
         public void Draw()
         {
-            Globals.spriteBatch.Begin();
-            //Globals.spriteBatch.Draw(Globals.backgroundTexture, new Rectangle(0, 0, 500, 500), Color.White);
-            Globals.spriteBatch.End();
+            throw new NotImplementedException();
         }
 
         //OBLICZENIA

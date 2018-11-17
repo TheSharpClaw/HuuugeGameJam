@@ -11,10 +11,7 @@ namespace HuuugeGame
     public static class Globals
     {
         public static Texture2D tekstury_robimy_w_taki_sposób = null;
-        public static Texture2D splashScreenLogo;
 
-        public static SpriteFont defaultFont = null;
-        
         public static SpriteBatch spriteBatch = null;
         public static GraphicsDeviceManager graphics = null;
         public static Vector2 screenSize;
