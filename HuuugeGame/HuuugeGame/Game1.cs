@@ -11,6 +11,7 @@ namespace HuuugeGame
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        StateManager manager = new StateManager();
 
         public Game1()
         {
@@ -65,6 +66,7 @@ namespace HuuugeGame
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            manager.Update();
             // TODO: Add your update logic here
 
             base.Update(gameTime);

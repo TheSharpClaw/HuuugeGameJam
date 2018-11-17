@@ -8,15 +8,22 @@ namespace HuuugeGame
 {
     class StateManager
     {
+        ComponentGame gameComponent = new ComponentGame();
+        ComponentMenu menuComponent = new ComponentMenu();
+        ComponentSplash splashComponent = new ComponentSplash();
         public void Update()
         {
+            //TU SIE DZIEJE INTERPRETACJA STANÓW
             switch (Globals.activeState)
             {
                 case Globals.enGameStates.SPLASH:
+                    splashComponent.Update();
                     break;
                 case Globals.enGameStates.MENU:
+                    menuComponent.Update();
                     break;
                 case Globals.enGameStates.GAME:
+                    gameComponent.Update();
                     break;
                 case Globals.enGameStates.PAUSE:
                     break;

@@ -16,7 +16,7 @@ namespace HuuugeGame
         public static GraphicsDeviceManager graphics = null;
         public static Vector2 screenSize;
 
-        public static enGameStates activeState;
+        public static enGameStates activeState = enGameStates.SPLASH;
         public enum enGameStates
         {
             SPLASH,
