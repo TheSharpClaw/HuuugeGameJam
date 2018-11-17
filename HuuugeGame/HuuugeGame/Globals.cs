@@ -18,6 +18,7 @@ namespace HuuugeGame
 
         //TEXTURES
         public static Texture2D backgroundTexture;
+        public static Texture2D spiderTexture;
 
 
         public static enGameStates activeState = enGameStates.SPLASH;
