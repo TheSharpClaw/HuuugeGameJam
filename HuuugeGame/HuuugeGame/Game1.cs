@@ -34,6 +34,7 @@ namespace HuuugeGame
 
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
             //Globals.MotherFlyTexture = Content.Load<Texture2D>("motherFly");
 
             base.Initialize();
