@@ -13,15 +13,14 @@ namespace HuuugeGame
 {
     class Spider : IEntity
     {
-
         public AnimatedSprite animatedSprite; 
         public int spiderWebPower;
+
         public Spider(IComponent stage, Vector2 size, Vector2 position, int velocity)
         {
             this.stage = stage;
-            Size = size;
             Position = position;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width/2, (int)Texture.Height/2);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width/2, Texture.Height/2);
             Velocity = velocity;
             spiderWebPower = 30;
             animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
@@ -29,7 +28,6 @@ namespace HuuugeGame
         }
 
         int counterTimer = 0;
-        public Vector2 Size { get; set; }
         public int Velocity { get; set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; } = Globals.spiderTexture;
@@ -72,7 +70,7 @@ namespace HuuugeGame
 
             if(keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))
             {
-                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width/2, (int)Texture.Height/2);
+                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width/2, Texture.Height/2);
                 if (counterTimer % 6 == 0) 
                     animatedSprite.Update();
             }
@@ -204,9 +202,12 @@ namespace HuuugeGame
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
-            else if (Position.X + Size.X > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - Size.X, Position.Y);
+
+            else if (Position.X + BoundingBox.Width > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - BoundingBox.Width, Position.Y);
+
             if (Position.Y < 24) Position = new Vector2(Position.X, 24);
-            else if (Position.Y + Size.Y > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - Size.Y);
+
+            else if (Position.Y + BoundingBox.Height > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - BoundingBox.Height);
         }
     }
 }
