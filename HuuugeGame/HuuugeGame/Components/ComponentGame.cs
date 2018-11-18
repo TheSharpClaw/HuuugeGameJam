@@ -85,6 +85,11 @@ namespace HuuugeGame
             {
                 entity.Draw();
             }
+
+            List<ChildrenFly> ListOfChildrenFlies = ((Hive)DrawList.Find(x => x is Hive)).ChildrenFlies;
+
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle(30, 2, 100, 22), new Color(0, 0, 0, 150));
+            Globals.spriteBatch.DrawString(Globals.defaultFont, "My Hive: " + ListOfChildrenFlies.Count.ToString(), new Vector2(36, 4), Color.White);
             Globals.spriteBatch.End();
         }
 
