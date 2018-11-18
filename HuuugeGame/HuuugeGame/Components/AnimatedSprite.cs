@@ -32,19 +32,17 @@ namespace HuuugeGame.Components
                 currentFrame = 0;
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 location)
+        public void Draw(Vector2 location, float angle, Color color)
         {
             int width = Texture.Width / Columns;
             int height = Texture.Height / Rows;
-            int row = (int)((float)currentFrame / (float)Columns);
+            int row = currentFrame / Columns;
             int column = currentFrame % Columns;
 
             Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Rectangle destinationRectangle = new Rectangle((int)location.X, (int)location.Y, width, height);
+            Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(Texture, destinationRectangle, sourceRectangle, Color.White);
-            spriteBatch.End();
+            Globals.spriteBatch.Draw(Texture, new Vector2(location.X + width/2, location.Y + height/2), sourceRectangle, color, angle, origin, 1.0f, SpriteEffects.None, 1);
         }
     }
 }
