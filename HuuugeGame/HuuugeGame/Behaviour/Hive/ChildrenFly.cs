@@ -21,7 +21,7 @@ namespace HuuugeGame.Behaviour.Hive
         private bool chasingMode = false;
         private int chaseRadious = 5;
 
-        private int velocity = 2;
+        private int velocity = 3;
 
         private Color childColor;
         private static Color[] ColorsArray =
