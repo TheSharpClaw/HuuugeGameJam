@@ -55,7 +55,23 @@ namespace HuuugeGame
             }
             Draw();
 
+            
+                if (getCountOfChildrenFlies() == 0)
 
+            {
+                ResetState();
+              
+                    Globals.winner = "SPIDER!";
+                }
+                else if (getCountOfChildrenFlies() > 150)
+                {
+
+                ResetState();
+
+
+                Globals.winner = "BUTTERFLY!";
+                }
+            
 
             //FLOWER
             if (!IfDrawListHasFlower())
@@ -81,6 +97,19 @@ namespace HuuugeGame
                     DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
                 }
             }
+        }
+
+        private void ResetState()
+        {
+            isLoaded = false;
+            counter1 = 0;
+            counter2 = 0;
+            DrawList = new List<IEntity>();
+            UpdateList = new List<IEntity>();
+            ObstacleList = new List<Obstacle>();
+
+
+                    Globals.activeState = Globals.enGameStates.WINSTATE;
         }
 
         //RYSOWANIE NA EKRANIE
@@ -111,7 +140,7 @@ namespace HuuugeGame
             int tex = 0;
             Texture2D texture = null;
 
-            for(int i = 0; i < 15; i++)
+            for (int i = 0; i < 20; i++)
             {
                 tex = rnd.Next(0, 7); 
 
@@ -176,7 +205,13 @@ namespace HuuugeGame
         }
         private bool IfDrawListHasFlower()
         {
-            return DrawList.Find(x => x is Flower)!=null;
+            return DrawList.Find(x => x is Flower) != null;
+        }
+        int getCountOfChildrenFlies()
+        {
+            List<ChildrenFly> ListOfChildrenFlies = ((Hive)DrawList.Find(x => x is Hive)).ChildrenFlies;
+
+            return ListOfChildrenFlies.Count;
         }
     }
 }

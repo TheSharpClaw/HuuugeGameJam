@@ -42,7 +42,10 @@ namespace HuuugeGame.Components
         public void Draw()
         {
             Globals.spriteBatch.Begin();
-            Globals.spriteBatch.DrawString(Globals.defaultFont, "Wygrywa " + "winner", new Vector2(Globals.screenSize.X/2-60, posY),Color.White);
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Globals.screenSize.X/2-110, (int)posY-2, 220, 22), new Color(0, 0, 0, 150));
+
+            Globals.spriteBatch.DrawString(Globals.defaultFont, "THE WINNER IS: " + Globals.winner.ToString(), new Vector2(Globals.screenSize.X/2-95, posY),Color.White);
             foreach (var button in _buttons)
             {
                 button.Draw(Globals.spriteBatch);
@@ -52,21 +55,25 @@ namespace HuuugeGame.Components
 
         public void Update()
         {
+            Globals.newKeyState = Keyboard.GetState();
+
             MenuControls();
             Draw();
+            Globals.oldKeyState = Globals.newKeyState;
+
         }
         public void MenuControls()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up))
+            if (KeypressTest(Keys.W) || KeypressTest(Keys.Up))
             {
                 refreshSelectedBtn(false);
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down))
+            else if (KeypressTest(Keys.S) || KeypressTest(Keys.Down))
             {
                 refreshSelectedBtn(true);
 
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Enter))
+            else if (KeypressTest(Keys.Space) || KeypressTest(Keys.Enter))
             {
                 String name = _buttons[currently_selected].nameBtn;
                 if (name.Equals("Retry"))
@@ -101,6 +108,13 @@ namespace HuuugeGame.Components
                 }
                 _buttons[currently_selected]._isSelected = true;
             }
+
+        }
+        private bool KeypressTest(Keys theKey)
+        {
+            if (Globals.oldKeyState.IsKeyUp(theKey) && Globals.newKeyState.IsKeyDown(theKey))
+                return true;
+            return false;
         }
     }
 }
