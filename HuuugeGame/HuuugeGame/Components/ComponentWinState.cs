@@ -43,8 +43,7 @@ namespace HuuugeGame.Components
         {
             Globals.spriteBatch.Begin();
             Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
-            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Globals.screenSize.X/2-110, (int)posY-2, 220, 22), new Color(0, 0, 0, 150));
-
+            Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle(0, 0, 700, 600), new Color(0, 0, 0, 150));
             Globals.spriteBatch.DrawString(Globals.defaultFont, "THE WINNER IS: " + Globals.winner.ToString(), new Vector2(Globals.screenSize.X/2-95, posY),Color.White);
             foreach (var button in _buttons)
             {
