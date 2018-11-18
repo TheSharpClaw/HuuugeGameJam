@@ -9,8 +9,6 @@ namespace HuuugeGame
     /// </summary>
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
         StateManager manager;
 
         public Game1()

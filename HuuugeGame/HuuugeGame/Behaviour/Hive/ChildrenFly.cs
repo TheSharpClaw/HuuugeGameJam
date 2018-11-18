@@ -1,4 +1,4 @@
-﻿using HuuugeGame.Content.Behaviour;
+using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,7 +14,7 @@ namespace HuuugeGame.Behaviour.Hive
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; } = Globals.childrenFlyTexture;
         public Rectangle BoundingBox { get; set; }
-        public IComponent stage { get; private set;  }
+        public IComponent stage { get; private set; }
 
         private Hive hive;
 
@@ -34,6 +34,7 @@ namespace HuuugeGame.Behaviour.Hive
             Color.HotPink,
             Color.OrangeRed
         };
+        public bool doUpdate = true;
 
         private Direction choose { get; set; } = Direction.None;
 
@@ -59,8 +60,7 @@ namespace HuuugeGame.Behaviour.Hive
 
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
-
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
         }
 
         private Vector2 GetVectorFromDirection(Direction direction)
@@ -142,8 +142,11 @@ namespace HuuugeGame.Behaviour.Hive
                 if (distance < chaseRadious)
                     chasingMode = false;
             }
-
-            Position = NextDirection();
+            if (doUpdate)
+            {
+                Position = NextDirection();
+                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+            }
         }
 
         public void Draw()
