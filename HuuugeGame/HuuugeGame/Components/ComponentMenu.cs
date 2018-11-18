@@ -70,7 +70,7 @@ namespace HuuugeGame
           }else if (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 String name = _buttons[currently_selected].nameBtn;
-                if (name.Equals("Retry")){
+                if (name.Equals("NewGame")){
                     Globals.activeState = Globals.enGameStates.GAME;
                 }
                 else if (name.Equals("Quit"))
