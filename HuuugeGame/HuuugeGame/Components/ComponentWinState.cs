@@ -26,10 +26,10 @@ namespace HuuugeGame.Components
                 Position = new Vector2(middleX, posY+50),
                 Text = "Retry",
             };
-            quitGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "Quit")
+            quitGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "MENU")
             {
                 Position = new Vector2(middleX, retryButton.Position.Y + Globals.yellowButton.Height + 50),
-                Text = "Quit",
+                Text = "MENU",
             };
 
             _buttons = new List<Button>()
@@ -79,9 +79,9 @@ namespace HuuugeGame.Components
                 {
                     Globals.activeState = Globals.enGameStates.GAME;
                 }
-                else if (name.Equals("Quit"))
+                else if (name.Equals("MENU"))
                 {
-                    Globals.activeState = Globals.enGameStates.EXIT;
+                    Globals.activeState = Globals.enGameStates.MENU;
                 }
 
             }
