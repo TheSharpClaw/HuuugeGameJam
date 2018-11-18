@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace HuuugeGame
         public static Texture2D arrowsIMG;
         public static Texture2D shiftIMG;
         
+        public static Song battleBackgroundMusic;
+
         public static SoundEffect wilhelmScreamSE;
 
         public static KeyboardState oldKeyState;
