@@ -1,4 +1,5 @@
-﻿using HuuugeGame.Behaviour;
+using HuuugeGame.Behaviour;
+using HuuugeGame.Components;
 using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,6 +12,8 @@ namespace HuuugeGame
 {
     class Spider : IEntity
     {
+
+        public AnimatedSprite animatedSprite; 
         public int spiderWebPower;
         public Spider(IComponent stage, Vector2 size, Vector2 position, int velocity)
         {
@@ -20,6 +23,8 @@ namespace HuuugeGame
             Rectangle = Texture.Bounds;
             Velocity = velocity;
             spiderWebPower = 30;
+            animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
+
         }
 
         int counterTimer = 0;
@@ -44,8 +49,10 @@ namespace HuuugeGame
             foreach (SpidersWeb web in spiderWebList)
                 web.Draw();
 
-            Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
-                null, Color.Black, angle, origin, 1.0f, SpriteEffects.None, 1);
+            //Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
+            //    null, Color.Black, angle, origin, 1.0f, SpriteEffects.None, 1);
+
+            animatedSprite.Draw(Position, angle, Color.Gray);
 
             #region drawSpiderWebPower
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
@@ -62,7 +69,6 @@ namespace HuuugeGame
 
         public void Update()
         {
-            //counterTimer == 60 - upłynęła 1 sekunda
             if (counterTimer++ > (60 * 2))
             {
                 if (spiderWebPower < 90)
@@ -71,6 +77,12 @@ namespace HuuugeGame
                 }
                 counterTimer = 0;
             }
+            
+            var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
+
+            if (counterTimer % 6 == 0 && (keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))) animatedSprite.Update();
+
+
             newKeyState = Keyboard.GetState();
             SpiderControls();
             SpiderCollision();

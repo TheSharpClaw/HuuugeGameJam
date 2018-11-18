@@ -1,4 +1,5 @@
-﻿using HuuugeGame.Content.Behaviour;
+﻿using HuuugeGame.Components;
+using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,9 @@ namespace HuuugeGame.Behaviour.Hive
     class Hive : IEntity
     {
         public Vector2 Position { get; set; }
+        public AnimatedSprite animatedSprite;
+        int counterTimer = 0;
+
         public Texture2D Texture { get; set; } = Globals.motherFlyTexture;
         public Rectangle Rectangle { get; set; }
 
@@ -40,10 +44,15 @@ namespace HuuugeGame.Behaviour.Hive
 
             for (int i = 0; i < offsprings; i++)
                 ChildrenFlies.Add(new ChildrenFly(this.stage, this));
+            animatedSprite = new AnimatedSprite(Globals.motherFlyTexture, 2, 2);
         }
 
         public void Update()
         {
+            var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
+
+            if (counterTimer++ % 6 == 0) animatedSprite.Update();
+
             HiveControls();
             HiveCollision();
             foreach (var fly in ChildrenFlies)
@@ -53,8 +62,12 @@ namespace HuuugeGame.Behaviour.Hive
         public void Draw()
         {
             //Globals.spriteBatch.Draw(Globals.motherFlyTexture, Position, Color.White);
-            Globals.spriteBatch.Draw(Globals.motherFlyTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
-               null, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            //Globals.spriteBatch.Draw(Globals.motherFlyTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
+            //   null, Color.White, angle, origin, 1.0f, SpriteEffects.None, 1);
+            animatedSprite.Draw(new Vector2(Center.X - Globals.motherFlyTexture.Width / 4, Center.Y - Globals.motherFlyTexture.Height / 4), angle, Color.White);
+
+
+
 
             foreach (ChildrenFly fly in ChildrenFlies)
                 fly.Draw();
@@ -146,7 +159,7 @@ namespace HuuugeGame.Behaviour.Hive
                         }
                 }
             }
-          
+
         }
 
         public void HiveCollision()
