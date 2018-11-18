@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,8 +63,8 @@ namespace HuuugeGame
                         i = 0;
                     }
                     if (i++ >= 150)                        
-                            alpha += 3;                       
-               
+                            alpha += 3;
+                    MediaPlayer.Play(Globals.battleBackgroundMusic);
                     break;
                 case 1:
                     if (alpha <= 0)
@@ -74,7 +75,7 @@ namespace HuuugeGame
                     }
                     
                         alpha -= 3;
-
+                    
                     break;
                 case 2:
                     if (alpha >= 255)

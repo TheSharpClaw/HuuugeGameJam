@@ -11,7 +11,10 @@ namespace HuuugeGame
     class SpidersWeb : IEntity
     {
         List<SpidersWeb> _spiderWebList;
+        List<ChildrenFly> caughtFlies = new List<ChildrenFly>();
+
         int _spiderWebLife;
+
         public SpidersWeb(IComponent stage, Vector2 position, Vector2 size, int power, List<SpidersWeb> spiderWebList)
         {
             Position = position;
@@ -47,21 +50,7 @@ namespace HuuugeGame
             Collision();
             if (--_spiderWebLife == 0)
             {
-                for (int i = 0; i < stage.DrawList.Count; i++)
-                {
-                    if (stage.DrawList[i] is Hive)
-                    {
-                        Hive x = (Hive)stage.DrawList[i];
-                        for (int j = 0; j < x.ChildrenFlies.Count; j++)
-                        {
-                            if (x.ChildrenFlies[j].BoundingBox.Intersects(BoundingBox))
-                            {
-                                x.ChildrenFlies.Remove(x.ChildrenFlies[j]);
-                              
-                            }
-                        }
-                    }
-                }
+                caughtFlies.ForEach(x => x.doUpdate = true);
                 _spiderWebList.Remove(this);
             }
         }
@@ -72,21 +61,15 @@ namespace HuuugeGame
 
         public void Collision()
         {
-            for (int i = 0; i < stage.DrawList.Count; i++)
+            var flies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies.FindAll(x => !caughtFlies.Contains(x) && x.BoundingBox.Intersects(BoundingBox));
+
+            if(flies.Count > 0)
             {
-                if (stage.DrawList[i] is Hive)
-                {
-                    Hive x = (Hive)stage.DrawList[i];
-                    foreach (ChildrenFly fly in x.ChildrenFlies)
-                    {
-                        if (fly.doUpdate == true && BoundingBox.Intersects(fly.BoundingBox))
-                        {
-                            if (fliesCoughtCounter++ >= Power) continue;
-                            fly.doUpdate = false;
-                            ResetSpiderWebLife();
-                        }
-                    }
-                }
+                flies.ForEach(x => x.doUpdate = false);
+
+                caughtFlies.AddRange(flies);
+
+                ResetSpiderWebLife();
             }
         }
     }
