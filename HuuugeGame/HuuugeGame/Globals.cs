@@ -44,6 +44,8 @@ namespace HuuugeGame
         public static Texture2D stone2Texture;
         public static Texture2D stone3Texture;
         public static Texture2D stone4Texture;
+        public static Texture2D holeTexture;
+        public static Texture2D bushTexture;
 
         public static Texture2D wsadIMG;
         public static Texture2D arrowsIMG;

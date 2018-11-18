@@ -69,6 +69,8 @@ namespace HuuugeGame
             Globals.stone2Texture = Content.Load<Texture2D>("textures/stone2_texture");
             Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
             Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
+            Globals.holeTexture = Content.Load<Texture2D>("textures/hole_texture");
+            Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
 
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);

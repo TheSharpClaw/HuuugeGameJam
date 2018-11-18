@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace HuuugeGame
 {
     class ComponentGame : StateTemplate, Behaviour.IComponent
@@ -17,12 +18,19 @@ namespace HuuugeGame
         private bool isLoaded = false;
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
+        public List<Obstacle> ObstacleList { get; set; } = new List<Obstacle>(); 
 
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
             var hive = new Hive(this, new Vector2(500,500), 13);
 
+            ObstacleList = GenerateListOfRandomObstacles();
+
+            foreach(IEntity obstacle in ObstacleList)
+            {
+                DrawList.Add(obstacle);
+            }
 
             DrawList.Add(new Spider(this, new Vector2(32, 32), new Vector2(100, 100), 2));
             DrawList.Add(new Hive(this, new Vector2(500, 500), 10));
@@ -93,7 +101,55 @@ namespace HuuugeGame
             Globals.spriteBatch.End();
         }
 
-       private Vector2 GenerateNewPositionForFlower()
+        private List<Obstacle> RandomizeObstacles()
+        {
+            List<Obstacle> listOfRandomizedObstacles = new List<Obstacle>();
+
+            Random rnd = new Random();
+            int x = 0;
+            int y = 0;
+            int t = 0;
+            Texture2D texture = null;
+
+            for(int i = 0; i <= 5; i++)
+            {
+                int t = rnd.Next(0, 7); 
+
+                switch (switch_on)
+	            {
+		            case 0:
+                        texture = Globals.stone1Texture;
+                    break;
+                    case 1:
+                        texture = Globals.stone2Texture;
+                    break;
+                    case 2:
+                        texture = Globals.stone3Texture;
+                    break;
+                    case 3:
+                        texture = Globals.stone4Texture;
+                    break;
+                    case 4:
+                        texture = Globals.stumpTexture;
+                    break;
+                    case 5:
+                        texture = Globals.holeTexture;
+                    break;
+                    case 6:
+                        texture = Globals.bushTexture;
+                    break;
+	            }
+
+                int x = rnd.Next(64, 636 - texture.Width);
+                int y = rnd.Next(64, 536 - texture.Height);
+
+                listOfRandomizedObstacles.Add(new Obstacle(this, new Vector2(x, y), texture));
+            }
+
+            return listOfRandomizedObstacles;
+        }
+
+        private Vector2 GenerateNewPositionForFlower()
         {
             int posX, posY;
             Random rnd = new Random();
