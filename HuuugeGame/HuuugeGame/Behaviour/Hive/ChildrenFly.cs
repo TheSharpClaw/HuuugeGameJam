@@ -16,6 +16,11 @@ namespace HuuugeGame.Behaviour.Hive
 
         private Hive hive;
 
+        private bool chasingMode = false;
+        private int chaseRadious = 5;
+
+        private int velocity = 2;
+
         private Color childColor;
         private static Color[] ColorsArray =
         {
@@ -48,21 +53,21 @@ namespace HuuugeGame.Behaviour.Hive
             switch (direction)
             {
                 case Direction.North:
-                    return new Vector2(-2, 0);
+                    return new Vector2(-velocity, 0);
                 case Direction.NorthEast:
-                    return new Vector2(-2, 2);
+                    return new Vector2((float)Math.Cos((Math.PI / 180 * 45)) *  -velocity, (float)Math.Cos((Math.PI / 180 * 45)) * velocity);
                 case Direction.East:
-                    return new Vector2(0, 2);
+                    return new Vector2(0, velocity);
                 case Direction.SouthEast:
-                    return new Vector2(2, 2);
+                    return new Vector2((float)Math.Cos((Math.PI / 180 * 45)) * velocity, (float)Math.Cos((Math.PI / 180 * 45)) * velocity);
                 case Direction.South:
-                    return new Vector2(2, 0);
+                    return new Vector2(velocity, 0);
                 case Direction.SouthWest:
-                    return new Vector2(2, -2);
+                    return new Vector2((float)Math.Cos((Math.PI / 180 * 45)) * velocity, (float)Math.Cos((Math.PI / 180 * 45)) * -velocity);
                 case Direction.West:
-                    return new Vector2(0, -2);
+                    return new Vector2(0, -velocity);
                 case Direction.NorthWest:
-                    return new Vector2(-2, -2);
+                    return new Vector2((float)Math.Cos((Math.PI / 180 * 45)) *  -velocity, (float)Math.Cos((Math.PI / 180 * 45)) * -velocity);
                 default:
                     return new Vector2(0, 0);
             }
@@ -84,10 +89,23 @@ namespace HuuugeGame.Behaviour.Hive
                 var resultVector = Position + GetVectorFromDirection(choose);
                 var resultDistance = Vector2.Distance(resultVector, hive.Center);
                 
-                if (!((distance > hive.maxRadious && resultDistance >= distance) || (distance < hive.minRadious && resultDistance <= distance)))
+                if (!chasingMode)
                 {
-                    return resultVector;
+                    if (!(distance > hive.maxRadious && resultDistance > distance) && !(distance < hive.minRadious && resultDistance < distance))
+                    {
+                        return resultVector;
+                    }
                 }
+                else
+                {
+                    if (!(distance > chaseRadious && resultDistance > distance))
+                    {
+                        return resultVector;
+                    }
+                }
+
+                if(directions.Count == 1)
+                    return resultVector;
 
                 directions.Remove(choose);
             }
@@ -104,6 +122,19 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
+            var distance = Vector2.Distance(Position, hive.Center);
+
+            if (!chasingMode)
+            {
+                if (distance > hive.maxRadious + 10)
+                    chasingMode = true;
+            }
+            else
+            {
+                if (distance < chaseRadious)
+                    chasingMode = false;
+            }
+
             Position = NextDirection();
         }
 
