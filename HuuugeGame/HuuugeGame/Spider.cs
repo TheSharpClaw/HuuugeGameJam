@@ -39,8 +39,6 @@ namespace HuuugeGame
         public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
 
-        Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
-
         KeyboardState oldKeyState;
         KeyboardState newKeyState;
 

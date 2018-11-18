@@ -30,8 +30,8 @@ namespace HuuugeGame.Components
 
             for(int i = 0; i < rows*columns; i++)
             {
-                int row = currentFrame / columns;
-                int column = currentFrame % columns;
+                int row = i / columns;
+                int column = i % columns;
 
                 Rectangle sourceRectangle = new Rectangle(frameWidth * column, frameHeight * row, frameWidth, frameHeight);
 
@@ -49,8 +49,8 @@ namespace HuuugeGame.Components
         {
             var frame = frames[currentFrame];
 
-            var vector = frame.Center.ToVector2();
-
+            var vector = frames[0].Center.ToVector2();
+            
             Globals.spriteBatch.Draw(Texture, (vector + location), frame, color, angle, vector, 1.0f, SpriteEffects.None, 1);
         }
     }
