@@ -165,15 +165,17 @@ namespace HuuugeGame.Behaviour.Hive
             if (Position.Y < 24) Position = new Vector2(Position.X, 24);
             else if (Position.Y + Size.Y > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - Size.Y);
 
-            //FLOWER COLLISION
-            //Flower flo = stage.DrawList.IndexOf()
+            //FLOWER COLLISION         
             for(int i = 0; i < stage.DrawList.Count(); i++)
             {
                 if(stage.DrawList[i] is Flower) {
                     if (stage.DrawList[i].BoundingBox.Intersects(this.BoundingBox))
                     {
                         stage.DrawList.Remove(stage.DrawList[i]);
-                        //TODO: add more flies
+                        //FLOWER - EATEN = ADD 10 SMALL BITCHES
+                        for (int k = 0; k < 10; k++)
+                            ChildrenFlies.Add(new ChildrenFly(this.stage, this));
+
                     }
                     break;
                 }
