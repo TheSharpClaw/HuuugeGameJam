@@ -183,7 +183,7 @@ namespace HuuugeGame
             {
                 if (spiderWebPower > 0)
                 {
-                    spiderWebList.Add(new SpidersWeb(this.stage, Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3,spiderWebList));
+                    spiderWebList.Add(new SpidersWeb(stage, Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 12,spiderWebList));
                     spiderWebPower -= 10;
                 }
             }
