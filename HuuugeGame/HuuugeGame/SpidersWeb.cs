@@ -1,4 +1,5 @@
-﻿using HuuugeGame.Content.Behaviour;
+﻿using HuuugeGame.Behaviour;
+using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -10,9 +11,13 @@ namespace HuuugeGame
     {
         List<SpidersWeb> _spiderWebList;
         int _spiderWebLife;
-        public SpidersWeb(Vector2 position, Vector2 size, int power, List<SpidersWeb> spiderWebList)
+        public SpidersWeb(IComponent stage, Vector2 position, Vector2 size, int power, List<SpidersWeb> spiderWebList)
         {
             Position = position;
+
+            Rectangle = Texture.Bounds;
+
+            this.stage = stage;
             Size = size;
             Power = power;
             _spiderWebList = spiderWebList;
@@ -25,11 +30,14 @@ namespace HuuugeGame
         public Vector2 Size { get; set; }
         public int Power { get; set; }
 
-        public Texture2D Texture { get; set; }
+        public Texture2D Texture { get; set; } = Globals.spiderWebTexture;
+        public Rectangle Rectangle { get; set; }
+
+        public IComponent stage { get; private set; }
 
         public void Draw()
         {
-            Globals.spriteBatch.Draw(Globals.spiderWebTexture, Position, Color.White);
+            Globals.spriteBatch.Draw(Texture, Position, Color.White);
         }
 
         public void Update()
