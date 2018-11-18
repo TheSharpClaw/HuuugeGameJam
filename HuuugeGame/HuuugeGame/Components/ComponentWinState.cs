@@ -7,82 +7,83 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HuuugeGame
+namespace HuuugeGame.Components
 {
-    class ComponentMenu : StateTemplate
+    class ComponentWinState : StateTemplate
     {
-
+        private Button retryButton, quitGameButton;
         private List<Button> _buttons;
-        private Button newGameButton,quitGameButton;
+        const int buttons_count = 3;    
         int currently_selected;
-        const int buttons_count = 2;
-        //UWAGA TEN STATE JEST RAKIEM, NIE ZAGŁĘBIAJ SIĘ TUTAJ
-
-        public ComponentMenu()
+        float middleX, posY;
+        public ComponentWinState()
         {
             currently_selected = 0;
-            float middleX = (Globals.screenSize.X - Globals.yellowButton.Width) / 2;
-            float posY = (Globals.screenSize.Y - (Globals.yellowButton.Height*buttons_count)-(50*buttons_count-1) ) / 2;
-            newGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "NewGame")
+            middleX = (Globals.screenSize.X - Globals.yellowButton.Width) / 2;
+            posY = (Globals.screenSize.Y - (Globals.yellowButton.Height * buttons_count) - (50 * buttons_count - 1)) / 2;
+            retryButton = new Button(Globals.yellowButton, Globals.defaultFont, "Retry")
             {
-                Position = new Vector2(middleX, posY),
-                Text = "New Game",
+                Position = new Vector2(middleX, posY+50),
+                Text = "Retry",
             };
             quitGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "Quit")
             {
-                Position = new Vector2(middleX, newGameButton.Position.Y+Globals.yellowButton.Height+50),
+                Position = new Vector2(middleX, retryButton.Position.Y + Globals.yellowButton.Height + 50),
                 Text = "Quit",
             };
 
             _buttons = new List<Button>()
             {
-                newGameButton,
+                retryButton,
                 quitGameButton,
             };
             _buttons[0]._isSelected = true;
-        }    
-
+        }
         public void Draw()
         {
-            //RYSOWANIE NA EKRANIE
             Globals.spriteBatch.Begin();
+            Globals.spriteBatch.DrawString(Globals.defaultFont, "Wygrywa " + "winner", new Vector2(Globals.screenSize.X/2-60, posY),Color.White);
             foreach (var button in _buttons)
             {
                 button.Draw(Globals.spriteBatch);
             }
             Globals.spriteBatch.End();
         }
+
         public void Update()
         {
             MenuControls();
-            Draw();            
+            Draw();
         }
         public void MenuControls()
-        {         
-           if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up))
-          {
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
                 refreshSelectedBtn(false);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down))
-            {                
+            {
                 refreshSelectedBtn(true);
 
-          }else if (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Enter))
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Enter))
             {
                 String name = _buttons[currently_selected].nameBtn;
-                if (name.Equals("Retry")){
+                if (name.Equals("Retry"))
+                {
                     Globals.activeState = Globals.enGameStates.GAME;
                 }
                 else if (name.Equals("Quit"))
                 {
                     Globals.activeState = Globals.enGameStates.EXIT;
                 }
-                          
+
             }
 
-           //true - w doł
-           //false - w góre
-           void refreshSelectedBtn(bool change){
+            //true - w doł
+            //false - w góre
+            void refreshSelectedBtn(bool change)
+            {
                 _buttons[currently_selected]._isSelected = false;
                 if (change)
                 {
@@ -100,6 +101,6 @@ namespace HuuugeGame
                 }
                 _buttons[currently_selected]._isSelected = true;
             }
-        } 
+        }
     }
 }
