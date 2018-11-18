@@ -1,6 +1,7 @@
 using HuuugeGame.Behaviour;
 using HuuugeGame.Components;
 using HuuugeGame.Content.Behaviour;
+using HuuugeGame.Behaviour.Hive;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -20,7 +21,7 @@ namespace HuuugeGame
             this.stage = stage;
             Size = size;
             Position = position;
-            BoundingBox = Texture.Bounds;
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width/2, (int)Texture.Height/2);
             Velocity = velocity;
             spiderWebPower = 30;
             animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
@@ -38,8 +39,6 @@ namespace HuuugeGame
 
         public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
-
-        Vector2 origin = new Vector2(Globals.spiderTexture.Width / 2, Globals.spiderTexture.Height / 2);
 
         KeyboardState oldKeyState;
         KeyboardState newKeyState;
@@ -69,6 +68,18 @@ namespace HuuugeGame
 
         public void Update()
         {
+            var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
+
+            if(keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))
+            {
+                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width/2, (int)Texture.Height/2);
+                if (counterTimer % 6 == 0) 
+                    animatedSprite.Update();
+            }
+            
+            List<ChildrenFly> ListOfChildrenFlies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies;                 
+            ListOfChildrenFlies.RemoveAll(x => x.BoundingBox.Intersects(BoundingBox));
+
             if (counterTimer++ > (60 * 2))
             {
                 if (spiderWebPower < 90)
@@ -78,9 +89,9 @@ namespace HuuugeGame
                 counterTimer = 0;
             }
             
-            var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
+            
 
-            if (counterTimer % 6 == 0 && (keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))) animatedSprite.Update();
+            
 
 
             newKeyState = Keyboard.GetState();

@@ -1,4 +1,4 @@
-﻿using HuuugeGame.Content.Behaviour;
+using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -61,7 +61,6 @@ namespace HuuugeGame.Behaviour.Hive
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
-
         }
 
         private Vector2 GetVectorFromDirection(Direction direction)
@@ -129,6 +128,8 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
+
             var distance = Vector2.Distance(Position, hive.Center);
 
             if (!chasingMode)
