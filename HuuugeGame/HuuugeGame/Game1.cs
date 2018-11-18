@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 
 namespace HuuugeGame
 {
@@ -71,6 +72,8 @@ namespace HuuugeGame
             Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
             Globals.holeTexture = Content.Load<Texture2D>("textures/hole_texture");
             Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
+
+            Globals.wilhelmScreamSE = Content.Load<SoundEffect>("sounds/Wilhelm_scream");
 
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
