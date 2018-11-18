@@ -1,4 +1,5 @@
 ﻿using HuuugeGame.Behaviour;
+using HuuugeGame.Behaviour.Hive;
 using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,14 +16,13 @@ namespace HuuugeGame
         {
             Position = position;
 
-            BoundingBox = Texture.Bounds;
+            BoundingBox = new Rectangle((int)Position.X + Globals.spiderWebTexture.Width * 3 / 10, (int)Position.Y + +Globals.spiderWebTexture.Height * 3 / 10, (int)Globals.spiderWebTexture.Width * 4 / 10, (int)Globals.spiderWebTexture.Height * 4 / 10);
 
             this.stage = stage;
             Size = size;
-            Power = power;
+            Power = 12;
             _spiderWebList = spiderWebList;
-            _spiderWebLife = 60 * 8;
-                //60 * 8 = 8sekund
+            ResetSpiderWebLife();
         }
 
         public Vector2 Position { get; set; }
@@ -33,6 +33,8 @@ namespace HuuugeGame
         public Texture2D Texture { get; set; } = Globals.spiderWebTexture;
         public Rectangle BoundingBox { get; set; }
 
+        private int fliesCoughtCounter = 0;
+
         public IComponent stage { get; private set; }
 
         public void Draw()
@@ -42,9 +44,48 @@ namespace HuuugeGame
 
         public void Update()
         {
-            if (--_spiderWebLife==0)
+            Collision();
+            if (--_spiderWebLife == 0)
             {
+                for (int i = 0; i < stage.DrawList.Count; i++)
+                {
+                    if (stage.DrawList[i] is Hive)
+                    {
+                        Hive x = (Hive)stage.DrawList[i];
+                        for (int j = 0; j < x.ChildrenFlies.Count; j++)
+                        {
+                            if (x.ChildrenFlies[j].BoundingBox.Intersects(BoundingBox))
+                            {
+                                x.ChildrenFlies.Remove(x.ChildrenFlies[j]);
+                            }
+                        }
+                    }
+                }
                 _spiderWebList.Remove(this);
+            }
+        }
+        public void ResetSpiderWebLife()
+        {
+            _spiderWebLife = 60 * 80;
+        }
+
+        public void Collision()
+        {
+            for (int i = 0; i < stage.DrawList.Count; i++)
+            {
+                if (stage.DrawList[i] is Hive)
+                {
+                    Hive x = (Hive)stage.DrawList[i];
+                    foreach (ChildrenFly fly in x.ChildrenFlies)
+                    {
+                        if (fly.doUpdate == true && BoundingBox.Intersects(fly.BoundingBox))
+                        {
+                            if (fliesCoughtCounter++ >= Power) continue;
+                            fly.doUpdate = false;
+                            ResetSpiderWebLife();
+                        }
+                    }
+                }
             }
         }
     }
