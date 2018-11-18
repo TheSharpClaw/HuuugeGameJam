@@ -11,38 +11,47 @@ namespace HuuugeGame.Components
     public class AnimatedSprite
     {
         public Texture2D Texture { get; set; }
-        public int Rows { get; set; }
-        public int Columns { get; set; }
-        private int currentFrame;
+
+        private Rectangle[] frames;
+
+        private int currentFrame = 0;
         private int totalFrames;
 
         public AnimatedSprite(Texture2D texture, int rows, int columns)
         {
             Texture = texture;
-            Rows = rows;
-            Columns = columns;
-            currentFrame = 0;
-            totalFrames = Rows * Columns;
+
+            frames = new Rectangle[rows * columns];
+
+            totalFrames = rows * columns;
+
+            int frameWidth = Texture.Width / columns;
+            int frameHeight = Texture.Height / rows;
+
+            for(int i = 0; i < rows*columns; i++)
+            {
+                int row = currentFrame / columns;
+                int column = currentFrame % columns;
+
+                Rectangle sourceRectangle = new Rectangle(frameWidth * column, frameHeight * row, frameWidth, frameHeight);
+
+                frames[i] = sourceRectangle;
+            }
         }
 
         public void Update()
         {
-            currentFrame++;
-            if (currentFrame == totalFrames)
+            if (++currentFrame == totalFrames)
                 currentFrame = 0;
         }
 
         public void Draw(Vector2 location, float angle, Color color)
         {
-            int width = Texture.Width / Columns;
-            int height = Texture.Height / Rows;
-            int row = currentFrame / Columns;
-            int column = currentFrame % Columns;
+            var frame = frames[currentFrame];
 
-            Rectangle sourceRectangle = new Rectangle(width * column, height * row, width, height);
-            Vector2 origin = new Vector2(sourceRectangle.Width / 2, sourceRectangle.Height / 2);
+            var vector = frame.Center.ToVector2();
 
-            Globals.spriteBatch.Draw(Texture, new Vector2(location.X + width/2, location.Y + height/2), sourceRectangle, color, angle, origin, 1.0f, SpriteEffects.None, 1);
+            Globals.spriteBatch.Draw(Texture, (vector + location), frame, color, angle, vector, 1.0f, SpriteEffects.None, 1);
         }
     }
 }
