@@ -13,9 +13,9 @@ namespace HuuugeGame
     {
 
         private List<Button> _buttons;
-        private Button newGameButton,quitGameButton;
+        private Button newGameButton,quitGameButton,infoButton;
         int currently_selected;
-        const int buttons_count = 2;
+        const int buttons_count = 3;
         //UWAGA TEN STATE JEST RAKIEM, NIE ZAGŁĘBIAJ SIĘ TUTAJ
 
         public ComponentMenu()
@@ -28,15 +28,21 @@ namespace HuuugeGame
                 Position = new Vector2(middleX, posY),
                 Text = "New Game",
             };
+            infoButton = new Button(Globals.yellowButton, Globals.defaultFont, "INFO")
+            {
+                Position = new Vector2(middleX, newGameButton.Position.Y + Globals.yellowButton.Height + 50),
+                Text = "Info",
+            };
             quitGameButton = new Button(Globals.yellowButton, Globals.defaultFont, "Quit")
             {
-                Position = new Vector2(middleX, newGameButton.Position.Y+Globals.yellowButton.Height+50),
+                Position = new Vector2(middleX, infoButton.Position.Y+Globals.yellowButton.Height+50),
                 Text = "Quit",
             };
 
             _buttons = new List<Button>()
             {
                 newGameButton,
+                infoButton,
                 quitGameButton,
             };
             _buttons[0]._isSelected = true;
@@ -46,6 +52,8 @@ namespace HuuugeGame
         {
             //RYSOWANIE NA EKRANIE
             Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
+
             foreach (var button in _buttons)
             {
                 button.Draw(Globals.spriteBatch);
@@ -54,20 +62,24 @@ namespace HuuugeGame
         }
         public void Update()
         {
+            Globals.newKeyState = Keyboard.GetState();
+
             MenuControls();
-            Draw();            
+            Draw();           
+            Globals.oldKeyState = Globals.newKeyState;
+
         }
         public void MenuControls()
         {         
-           if (Keyboard.GetState().IsKeyDown(Keys.W) || Keyboard.GetState().IsKeyDown(Keys.Up))
+           if (KeypressTest(Keys.W) || KeypressTest(Keys.Up))
           {
                 refreshSelectedBtn(false);
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.S) || Keyboard.GetState().IsKeyDown(Keys.Down))
+            else if (KeypressTest(Keys.S) || KeypressTest(Keys.Down))
             {                
                 refreshSelectedBtn(true);
 
-          }else if (Keyboard.GetState().IsKeyDown(Keys.Space) || Keyboard.GetState().IsKeyDown(Keys.Enter))
+          }else if (KeypressTest(Keys.Space) || KeypressTest(Keys.Enter))
             {
                 String name = _buttons[currently_selected].nameBtn;
                 if (name.Equals("NewGame")){
@@ -77,7 +89,11 @@ namespace HuuugeGame
                 {
                     Globals.activeState = Globals.enGameStates.EXIT;
                 }
-                          
+                else if (name.Equals("INFO"))
+                {
+                    Globals.activeState = Globals.enGameStates.INFO;
+                }
+
             }
 
            //true - w doł
@@ -100,6 +116,13 @@ namespace HuuugeGame
                 }
                 _buttons[currently_selected]._isSelected = true;
             }
-        } 
+        }
+        private bool KeypressTest(Keys theKey)
+        {
+            if (Globals.oldKeyState.IsKeyUp(theKey) && Globals.newKeyState.IsKeyDown(theKey))
+                return true;
+            return false;
+        }
     }
+
 }

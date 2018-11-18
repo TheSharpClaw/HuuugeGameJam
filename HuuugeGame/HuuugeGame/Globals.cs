@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,7 +46,15 @@ namespace HuuugeGame
         public static Texture2D stone4Texture;
 
 
-        public static enGameStates activeState = enGameStates.INFO;
+        public static Texture2D wsadIMG;
+        public static Texture2D arrowsIMG;
+        public static Texture2D shiftIMG;
+
+        public static KeyboardState oldKeyState;
+        public static KeyboardState newKeyState;
+
+
+        public static enGameStates activeState = enGameStates.SPLASH;
         public enum enGameStates
         {
             SPLASH,
