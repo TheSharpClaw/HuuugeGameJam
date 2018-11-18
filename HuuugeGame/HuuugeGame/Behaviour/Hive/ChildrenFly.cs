@@ -59,7 +59,7 @@ namespace HuuugeGame.Behaviour.Hive
 
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
-            BoundingBox = Texture.Bounds;
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
 
         }
 
@@ -128,6 +128,8 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
+
             var distance = Vector2.Distance(Position, hive.Center);
 
             if (!chasingMode)
