@@ -17,12 +17,14 @@ namespace HuuugeGame
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
 
+        int i = 0;
 
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
             DrawList.Add(new Spider(new Vector2(32, 32), new Vector2(100, 100), 3));
             DrawList.Add(new Hive(100));
+            DrawList.Insert(0, new Flower(DrawList));
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
         }
@@ -54,5 +56,6 @@ namespace HuuugeGame
             }
             Globals.spriteBatch.End();
         }
+    
     }
 }
