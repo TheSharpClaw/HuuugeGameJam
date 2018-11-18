@@ -101,21 +101,21 @@ namespace HuuugeGame
             Globals.spriteBatch.End();
         }
 
-        private List<Obstacle> RandomizeObstacles()
+        private List<Obstacle> GenerateListOfRandomObstacles()
         {
             List<Obstacle> listOfRandomizedObstacles = new List<Obstacle>();
 
             Random rnd = new Random();
             int x = 0;
             int y = 0;
-            int t = 0;
+            int tex = 0;
             Texture2D texture = null;
 
-            for(int i = 0; i <= 5; i++)
+            for(int i = 0; i < 20; i++)
             {
-                int t = rnd.Next(0, 7); 
+                tex = rnd.Next(0, 7); 
 
-                switch (switch_on)
+                switch (tex)
 	            {
 		            case 0:
                         texture = Globals.stone1Texture;
@@ -140,8 +140,8 @@ namespace HuuugeGame
                     break;
 	            }
 
-                int x = rnd.Next(64, 636 - texture.Width);
-                int y = rnd.Next(64, 536 - texture.Height);
+                x = rnd.Next(64, 636 - texture.Width);
+                y = rnd.Next(64, 536 - texture.Height);
 
                 listOfRandomizedObstacles.Add(new Obstacle(this, new Vector2(x, y), texture));
             }

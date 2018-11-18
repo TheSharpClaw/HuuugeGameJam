@@ -5,22 +5,30 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace HuuugeGame
 {
-    public class Obstacle : IEntity
+    class Obstacle : IEntity
     {
-        public Vector2 Position { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public Texture2D Texture { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public Rectangle BoundingBox { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public Vector2 Position { get; set; }
+        public Texture2D Texture { get; set; }
+        public Rectangle BoundingBox { get; set; }
+        public IComponent stage { get; private set; }
+        public Obstacle(IComponent stage, Vector2 position, Texture2D texture)
+        {
+            Position = position;
+            Texture = texture;
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
 
-        public IComponent stage => throw new System.NotImplementedException();
+            this.stage = stage;
+        }
+        
 
         public void Draw()
         {
-            throw new System.NotImplementedException();
+            Globals.spriteBatch.Draw(Texture, BoundingBox, Color.White);
         }
 
         public void Update()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
