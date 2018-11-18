@@ -29,9 +29,11 @@ namespace HuuugeGame
         public static Texture2D backgroundTexture;
 
         public static Texture2D spiderTexture;
+        public static Texture2D spiderStaticTexture;
         public static Texture2D spiderWebTexture;
 
         public static Texture2D motherFlyTexture;
+        public static Texture2D motherFlyStaticTexture;
         public static Texture2D childrenFlyTexture;
 
         public static Texture2D flowerTexture;
