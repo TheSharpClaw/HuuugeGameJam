@@ -66,7 +66,7 @@ namespace HuuugeGame
         }
         public void ResetSpiderWebLife()
         {
-            _spiderWebLife = 60 * 80;
+            _spiderWebLife = 60 * 8;
         }
 
         public void Collision()
