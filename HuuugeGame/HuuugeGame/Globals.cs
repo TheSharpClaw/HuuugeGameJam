@@ -24,6 +24,7 @@ namespace HuuugeGame
         public static Random RandomBitches { get; set; } = new Random(1000);
         //TEXTURES
         public static Texture2D splashScreenLogo;
+        public static Texture2D splashScreenLogo2;
 
         public static Texture2D hpBar;
         public static Texture2D hpBar_white;

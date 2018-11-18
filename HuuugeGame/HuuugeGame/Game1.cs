@@ -45,6 +45,7 @@ namespace HuuugeGame
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
 
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/splash_logo");
+            Globals.splashScreenLogo2 = Content.Load<Texture2D>("images/hangooover");
             Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
