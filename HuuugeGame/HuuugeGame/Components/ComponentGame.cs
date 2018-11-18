@@ -14,20 +14,21 @@ namespace HuuugeGame
 {
     class ComponentGame : StateTemplate, Behaviour.IComponent
     {
-        private int counter1,counter2;
+        private int counter1, counter2;
         private bool isLoaded = false;
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
-        public List<Obstacle> ObstacleList { get; set; } = new List<Obstacle>(); 
+        public List<Obstacle> ObstacleList { get; set; } = new List<Obstacle>();
+        Random rnd = new Random();
 
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
-            var hive = new Hive(this, new Vector2(500,500), 13);
+            var hive = new Hive(this, new Vector2(500, 500), 13);
 
             ObstacleList = GenerateListOfRandomObstacles();
 
-            foreach(IEntity obstacle in ObstacleList)
+            foreach (IEntity obstacle in ObstacleList)
             {
                 DrawList.Add(obstacle);
             }
@@ -52,9 +53,9 @@ namespace HuuugeGame
             }
             if (KeypressTest(Keys.Escape))
             {
-                 Globals.activeState = Globals.enGameStates.PAUSE;
-                }
-            
+                Globals.activeState = Globals.enGameStates.PAUSE;
+            }
+
 
             for (int i = 0; i < UpdateList.Count(); i++)
             {
@@ -62,46 +63,46 @@ namespace HuuugeGame
             }
             Draw();
 
-            
-                if (getCountOfChildrenFlies() == 0)
+
+            if (getCountOfChildrenFlies() == 0)
 
             {
                 ResetState();
-              
-                    Globals.winner = "SPIDER!";
-                }
-                else if (getCountOfChildrenFlies() > 150)
-                {
+
+                Globals.winner = "SPIDER!";
+            }
+            else if (getCountOfChildrenFlies() > 150)
+            {
 
                 ResetState();
 
 
                 Globals.winner = "BUTTERFLY!";
-                }
-            
+            }
+
 
             //FLOWER
             if (!IfDrawListHasFlower())
             {
                 counter2 = 0;
-                if (counter1< 60 * 3)
-                     counter1++;
-                  else
+                if (counter1 < 60 * 3)
+                    counter1++;
+                else
                 {
-                    DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
+                    DrawList.Insert(20,new Flower(this, GenerateNewPositionForFlower()));
 
                 }
             }
             else
             {
-                counter1= 0;
+                counter1 = 0;
                 if (counter2 < 60 * 8)
                     counter2++;
                 else
                 {
                     counter2 = 0;
-                    DrawList.Remove(DrawList.Find(x=>x is Flower));
-                    DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
+                    DrawList.Remove(DrawList.Find(x => x is Flower));
+                    DrawList.Insert(20,new Flower(this, GenerateNewPositionForFlower()));
                 }
             }
             Globals.oldKeyState = Globals.newKeyState;
@@ -123,7 +124,7 @@ namespace HuuugeGame
             ObstacleList = new List<Obstacle>();
 
 
-                    Globals.activeState = Globals.enGameStates.WINSTATE;
+            Globals.activeState = Globals.enGameStates.WINSTATE;
         }
 
         //RYSOWANIE NA EKRANIE
@@ -132,12 +133,23 @@ namespace HuuugeGame
             Globals.spriteBatch.Begin();
 
             Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
+
+
+
+
+
+
+
             foreach (IEntity entity in DrawList)
             {
                 entity.Draw();
             }
 
+
+
+
             List<ChildrenFly> ListOfChildrenFlies = ((Hive)DrawList.Find(x => x is Hive)).ChildrenFlies;
+
 
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle(30, 2, 100, 22), new Color(0, 0, 0, 150));
             Globals.spriteBatch.DrawString(Globals.defaultFont, "My Hive: " + ListOfChildrenFlies.Count.ToString(), new Vector2(36, 4), Color.White);
@@ -156,32 +168,32 @@ namespace HuuugeGame
 
             for (int i = 0; i < 20; i++)
             {
-                tex = rnd.Next(0, 7); 
+                tex = rnd.Next(0, 7);
 
                 switch (tex)
-	            {
-		            case 0:
+                {
+                    case 0:
                         texture = Globals.stone1Texture;
-                    break;
+                        break;
                     case 1:
                         texture = Globals.stone2Texture;
-                    break;
+                        break;
                     case 2:
                         texture = Globals.stone3Texture;
-                    break;
+                        break;
                     case 3:
                         texture = Globals.stone4Texture;
-                    break;
+                        break;
                     case 4:
                         texture = Globals.stumpTexture;
-                    break;
+                        break;
                     case 5:
                         texture = Globals.holeTexture;
-                    break;
+                        break;
                     case 6:
                         texture = Globals.bushTexture;
-                    break;
-	            }
+                        break;
+                }
 
                 bool escapeWhileFlag;
 
@@ -194,13 +206,13 @@ namespace HuuugeGame
 
                     foreach (var obstacle in listOfRandomizedObstacles)
                     {
-                        if (new Rectangle(x+5, y+5, texture.Width-10, texture.Height-10).Intersects(obstacle.BoundingBox))
+                        if (new Rectangle(x + 5, y + 5, texture.Width - 10, texture.Height - 10).Intersects(obstacle.BoundingBox))
                         {
                             escapeWhileFlag = true;
                         }
                     }
                 } while (escapeWhileFlag);
-               
+
 
                 listOfRandomizedObstacles.Add(new Obstacle(this, new Vector2(x, y), texture));
             }
@@ -210,12 +222,22 @@ namespace HuuugeGame
 
         private Vector2 GenerateNewPositionForFlower()
         {
-            int posX, posY;
-            Random rnd = new Random();
-            posX = rnd.Next(24 + Globals.flowerTexture.Width / 2, (int)Globals.screenSize.X - 24 - Globals.flowerTexture.Width / 2);
-            posY = rnd.Next(24 + Globals.flowerTexture.Height / 2, (int)Globals.screenSize.Y - 24 - Globals.flowerTexture.Height / 2);
-            //TODO: Check if not collide with any created Obstacle
-            return new Vector2(posX,posY);
+            var entities = DrawList.FindAll(x => x is Obstacle).ToList();
+            int posX = 0, posY = 0;
+            var flowerRectangle = new Rectangle(posX, posY, Globals.flowerTexture.Width, Globals.flowerTexture.Height);
+
+
+
+            while (true)
+            {
+                posX = rnd.Next(24 + Globals.flowerTexture.Width, (int)Globals.screenSize.X - 24 - Globals.flowerTexture.Width);
+                posY = rnd.Next(24 + Globals.flowerTexture.Height, (int)Globals.screenSize.Y - 24 - Globals.flowerTexture.Height);
+
+                flowerRectangle = new Rectangle(new Point(posX, posY), flowerRectangle.Size);
+
+                if (entities.All(x => !x.BoundingBox.Intersects(flowerRectangle)))
+                    return new Vector2(posX, posY);
+            }
         }
         private bool IfDrawListHasFlower()
         {

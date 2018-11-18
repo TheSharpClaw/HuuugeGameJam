@@ -24,6 +24,7 @@ namespace HuuugeGame
         public static Random RandomBitches { get; set; } = new Random(1000);
         //TEXTURES
         public static Texture2D splashScreenLogo;
+        public static Texture2D splashScreenLogo2;
 
         public static Texture2D hpBar;
         public static Texture2D hpBar_white;
@@ -56,6 +57,8 @@ namespace HuuugeGame
         public static Song battleBackgroundMusic;
 
         public static SoundEffect wilhelmScreamSE;
+        public static SoundEffect stepSE;
+        public static SoundEffect victorySoundEffect;
 
         public static KeyboardState oldKeyState;
         public static KeyboardState newKeyState;
