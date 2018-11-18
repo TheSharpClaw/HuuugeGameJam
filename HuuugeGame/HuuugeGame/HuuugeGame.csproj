@@ -44,6 +44,7 @@
     <Compile Include="Behaviour\Hive\ChildrenFly.cs" />
     <Compile Include="Behaviour\Hive\Hive.cs" />
     <Compile Include="Behaviour\IComponent.cs" />
+    <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\ComponentGame.cs" />
     <Compile Include="Components\ComponentMenu.cs" />
     <Compile Include="Components\ComponentSplash.cs" />
