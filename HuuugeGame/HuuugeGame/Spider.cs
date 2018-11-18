@@ -1,4 +1,5 @@
-﻿using HuuugeGame.Components;
+using HuuugeGame.Behaviour;
+using HuuugeGame.Components;
 using HuuugeGame.Content.Behaviour;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,10 +15,12 @@ namespace HuuugeGame
 
         public AnimatedSprite animatedSprite; 
         public int spiderWebPower;
-        public Spider(Vector2 size, Vector2 position, int velocity)
+        public Spider(IComponent stage, Vector2 size, Vector2 position, int velocity)
         {
+            this.stage = stage;
             Size = size;
             Position = position;
+            Rectangle = Texture.Bounds;
             Velocity = velocity;
             spiderWebPower = 30;
             animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
@@ -28,7 +31,10 @@ namespace HuuugeGame
         public Vector2 Size { get; set; }
         public int Velocity { get; set; }
         public Vector2 Position { get; set; }
-        public Texture2D Texture { get; set; }
+        public Texture2D Texture { get; set; } = Globals.spiderTexture;
+        public Rectangle Rectangle { get; set; }
+
+        public IComponent stage { get; private set; }
 
         public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
@@ -179,7 +185,7 @@ namespace HuuugeGame
             {
                 if (spiderWebPower > 0)
                 {
-                    spiderWebList.Add(new SpidersWeb(Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3,spiderWebList));
+                    spiderWebList.Add(new SpidersWeb(this.stage, Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 3,spiderWebList));
                     spiderWebPower -= 10;
                 }
             }

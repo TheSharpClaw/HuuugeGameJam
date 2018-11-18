@@ -13,11 +13,12 @@ namespace HuuugeGame.Behaviour.Hive
 {
     class Hive : IEntity
     {
+        public Vector2 Position { get; set; }
         public AnimatedSprite animatedSprite;
         int counterTimer = 0;
 
-        public Vector2 Position { get; set; } = new Vector2(200, 200);
         public Texture2D Texture { get; set; } = Globals.motherFlyTexture;
+        public Rectangle Rectangle { get; set; }
 
         public Vector2 Center { get => new Vector2(Position.X + Globals.motherFlyTexture.Width / 2, Position.Y + Globals.motherFlyTexture.Height / 2); }
 
@@ -32,14 +33,18 @@ namespace HuuugeGame.Behaviour.Hive
         Vector2 origin = new Vector2(Globals.motherFlyTexture.Width / 2, Globals.motherFlyTexture.Height / 2);
         public Vector2 Size { get; set; } = new Vector2(32, 32);
 
-        public Hive(int offsprings = 0)
+        public IComponent stage { get; private set; }
+
+        public Hive(IComponent stage, Vector2 position, int offsprings = 0)
         {
+            this.stage = stage;
+
+            Position = position;
+            Rectangle = Texture.Bounds;
+
             for (int i = 0; i < offsprings; i++)
-                ChildrenFlies.Add(new ChildrenFly(this));
-
-
+                ChildrenFlies.Add(new ChildrenFly(this.stage, this));
             animatedSprite = new AnimatedSprite(Globals.motherFlyTexture, 2, 2);
-
         }
 
         public void Update()
