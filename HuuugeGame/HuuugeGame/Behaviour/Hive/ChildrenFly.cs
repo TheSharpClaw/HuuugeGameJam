@@ -23,6 +23,12 @@ namespace HuuugeGame.Behaviour.Hive
 
         private int velocity = 3;
 
+        int sizeX = Globals.childrenFlyTexture.Width;
+        int sizeY = Globals.childrenFlyTexture.Height;
+
+        int incrementX = 0;
+        int incrementY = 0;
+
         private Color childColor;
         private static Color[] ColorsArray =
         {
@@ -60,7 +66,9 @@ namespace HuuugeGame.Behaviour.Hive
 
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+            // BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+            updateBoundingBox();
+
         }
 
         private Vector2 GetVectorFromDirection(Direction direction)
@@ -128,8 +136,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
-
+            updateBoundingBox();
             var distance = Vector2.Distance(Position, hive.Center);
 
             if (!chasingMode)
@@ -145,13 +152,32 @@ namespace HuuugeGame.Behaviour.Hive
             if (doUpdate)
             {
                 Position = NextDirection();
-                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+                updateBoundingBox();
+            }
+            if (incrementX < sizeX)
+            {
+                incrementX++;
+                updateBoundingBox();
+            }
+            if (incrementY < sizeY)
+            {
+                incrementY++;
+                updateBoundingBox();
             }
         }
+        private void updateBoundingBox()
+        {
+            if(incrementX < sizeX || incrementY < sizeY)
+            BoundingBox = new Rectangle((int)Position.X - (incrementX / 2), (int)Position.Y - (incrementY / 2), incrementX, incrementY);
+            else
+                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Texture.Width, (int)Texture.Height);
 
+        }
         public void Draw()
         {
-            Globals.spriteBatch.Draw(Texture, Position, childColor);
+            //Globals.spriteBatch.Draw(Texture, Position, childColor);
+            Globals.spriteBatch.Draw(Texture, BoundingBox, childColor);
+
         }
     }
 }
