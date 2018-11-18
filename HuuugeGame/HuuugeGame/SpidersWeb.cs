@@ -23,7 +23,7 @@ namespace HuuugeGame
 
             this.stage = stage;
             Size = size;
-            Power = 12;
+            Power = power;
             _spiderWebList = spiderWebList;
             ResetSpiderWebLife();
         }
@@ -61,7 +61,7 @@ namespace HuuugeGame
 
         public void Collision()
         {
-            var flies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies.FindAll(x => !caughtFlies.Contains(x) && x.BoundingBox.Intersects(BoundingBox));
+            var flies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies.FindAll(x => !caughtFlies.Contains(x) && x.BoundingBox.Intersects(BoundingBox) && caughtFlies.Count < Power);
 
             if(flies.Count > 0)
             {
