@@ -111,7 +111,7 @@ namespace HuuugeGame
             int tex = 0;
             Texture2D texture = null;
 
-            for(int i = 0; i < 20; i++)
+            for(int i = 0; i < 15; i++)
             {
                 tex = rnd.Next(0, 7); 
 
@@ -140,8 +140,24 @@ namespace HuuugeGame
                     break;
 	            }
 
-                x = rnd.Next(64, 636 - texture.Width);
-                y = rnd.Next(64, 536 - texture.Height);
+                bool escapeWhileFlag;
+
+                do
+                {
+                    escapeWhileFlag = false;
+
+                    x = rnd.Next(64, 636 - texture.Width);
+                    y = rnd.Next(64, 536 - texture.Height);
+
+                    foreach (var obstacle in listOfRandomizedObstacles)
+                    {
+                        if (new Rectangle(x+5, y+5, texture.Width-10, texture.Height-10).Intersects(obstacle.BoundingBox))
+                        {
+                            escapeWhileFlag = true;
+                        }
+                    }
+                } while (escapeWhileFlag);
+               
 
                 listOfRandomizedObstacles.Add(new Obstacle(this, new Vector2(x, y), texture));
             }

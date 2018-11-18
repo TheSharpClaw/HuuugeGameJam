@@ -87,11 +87,6 @@ namespace HuuugeGame
                 counterTimer = 0;
             }
             
-            
-
-            
-
-
             newKeyState = Keyboard.GetState();
             SpiderControls();
             SpiderCollision();
