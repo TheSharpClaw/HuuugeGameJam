@@ -76,7 +76,6 @@ namespace HuuugeGame
             Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
 
             Globals.battleBackgroundMusic = Content.Load<Song>("sounds/battle_background_music");
-            MediaPlayer.Play(Globals.battleBackgroundMusic);
 
             Globals.wilhelmScreamSE = Content.Load<SoundEffect>("sounds/Wilhelm_scream");
 
