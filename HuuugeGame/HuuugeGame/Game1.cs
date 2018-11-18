@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace HuuugeGame
 {
@@ -31,7 +32,7 @@ namespace HuuugeGame
             Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
-
+            MediaPlayer.IsRepeating = true;
             base.Initialize();
         }
 
@@ -74,6 +75,7 @@ namespace HuuugeGame
             Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
 
             Globals.battleBackgroundMusic = Content.Load<Song>("sounds/battle_background_music");
+            MediaPlayer.Play(Globals.battleBackgroundMusic);
 
             Globals.wilhelmScreamSE = Content.Load<SoundEffect>("sounds/Wilhelm_scream");
 
