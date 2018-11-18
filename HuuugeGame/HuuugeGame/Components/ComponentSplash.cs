@@ -33,6 +33,8 @@ namespace HuuugeGame
 
                     break;
                 case 1:
+                    Globals.activeState = Globals.enGameStates.MENU;
+
                     Globals.spriteBatch.Draw(Globals.splashScreenLogo, logoPosition, Color.White);
 
                     Globals.spriteBatch.Draw(Globals.splashScreenLogo, logoPosition, new Color(Color.Black, alpha));
