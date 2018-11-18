@@ -87,10 +87,14 @@ namespace HuuugeGame
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || Globals.exit)
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Globals.exit)
                 Exit();
-            manager.Update();
-            base.Update(gameTime);
+            if (!Globals.pause)
+            {
+                manager.Update();
+                base.Update(gameTime);
+            }
         }
 
         protected override void Draw(GameTime gameTime)

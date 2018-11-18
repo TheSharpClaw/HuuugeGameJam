@@ -57,6 +57,8 @@ namespace HuuugeGame
         public static KeyboardState oldKeyState;
         public static KeyboardState newKeyState;
 
+        public static bool pause = false;
+
         public static enGameStates activeState = enGameStates.SPLASH;
         public static string winner;
 

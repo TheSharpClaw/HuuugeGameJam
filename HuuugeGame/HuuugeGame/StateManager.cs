@@ -15,6 +15,7 @@ namespace HuuugeGame
         ComponentTest testComponent = new ComponentTest();
         ComponentWinState winStateComponent = new ComponentWinState();
         ComponentInfo componentInfo = new ComponentInfo();
+        ComponentPause componentPause = new ComponentPause();
         public void Update()
         {
             //TU SIE DZIEJE INTERPRETACJA STANÓW
@@ -30,6 +31,7 @@ namespace HuuugeGame
                     gameComponent.Update();
                     break;
                 case Globals.enGameStates.PAUSE:
+                    componentPause.Update();
                     break;
                 case Globals.enGameStates.EXIT:
                     Globals.exit = true;

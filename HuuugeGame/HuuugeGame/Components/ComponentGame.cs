@@ -43,11 +43,18 @@ namespace HuuugeGame
         //OBLICZENIA
         public void Update()
         {
+            Globals.newKeyState = Keyboard.GetState();
+
             if (!isLoaded)
             {
                 OnLoad();
                 isLoaded = true;
             }
+            if (KeypressTest(Keys.Escape))
+            {
+                 Globals.activeState = Globals.enGameStates.PAUSE;
+                }
+            
 
             for (int i = 0; i < UpdateList.Count(); i++)
             {
@@ -97,8 +104,15 @@ namespace HuuugeGame
                     DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
                 }
             }
-        }
+            Globals.oldKeyState = Globals.newKeyState;
 
+        }
+        private bool KeypressTest(Keys theKey)
+        {
+            if (Globals.oldKeyState.IsKeyUp(theKey) && Globals.newKeyState.IsKeyDown(theKey))
+                return true;
+            return false;
+        }
         private void ResetState()
         {
             isLoaded = false;
