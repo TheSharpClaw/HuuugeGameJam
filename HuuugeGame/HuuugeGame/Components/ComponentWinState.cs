@@ -1,6 +1,7 @@
 ﻿using HuuugeGame.Controls;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,9 @@ namespace HuuugeGame.Components
         const int buttons_count = 3;    
         int currently_selected;
         float middleX, posY;
+
+        private int victorySEFlag = 0;
+
         public ComponentWinState()
         {
             currently_selected = 0;
@@ -54,6 +58,21 @@ namespace HuuugeGame.Components
 
         public void Update()
         {
+            if(victorySEFlag == 0)
+            {
+                MediaPlayer.Stop();
+                Globals.victorySoundEffect.Play(0.35f, 0, 0);
+                victorySEFlag++;
+            }
+            else if(victorySEFlag <= 200)
+            {
+                MediaPlayer.Play(Globals.battleBackgroundMusic);
+            }
+            else
+            {
+                victorySEFlag++;
+            }           
+
             Globals.newKeyState = Keyboard.GetState();
 
             MenuControls();
