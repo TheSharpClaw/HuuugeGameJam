@@ -17,7 +17,6 @@ namespace HuuugeGame
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
 
-
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
@@ -27,11 +26,8 @@ namespace HuuugeGame
             DrawList.Add(hive);
             DrawList.Insert(0, new Flower(this, new Vector2(300,300), hive));
 
-
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
-
-
         }
 
         //OBLICZENIA

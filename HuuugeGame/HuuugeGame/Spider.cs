@@ -178,8 +178,6 @@ namespace HuuugeGame
                         }
                 }
             }
-
-
             #region webPlacing
             if (KeypressTest(Keys.LeftShift))
             {

@@ -32,13 +32,10 @@ namespace HuuugeGame
             Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
-            Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
-
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
-            Globals.splashScreenLogo = Content.Load<Texture2D>("images/splash_logo");
 
-            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
-            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+            Globals.splashScreenLogo = Content.Load<Texture2D>("images/splash_logo");
+            Globals.backgroundTexture = Content.Load<Texture2D>("textures/background_texture");
 
             Globals.yellowButton = Content.Load<Texture2D>("textures/yellow_button");
 
@@ -48,6 +45,9 @@ namespace HuuugeGame
             Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
             Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
 
+            Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
+
             Globals.flowerTexture = Content.Load<Texture2D>("textures/flower_texture");
 
             Globals.stumpTexture = Content.Load<Texture2D>("textures/stump_texture");
@@ -56,7 +56,6 @@ namespace HuuugeGame
             Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
             Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
 
-            
             base.Initialize();
         }
 
@@ -66,46 +65,26 @@ namespace HuuugeGame
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
-            Globals.motherFlyTexture = Content.Load<Texture2D>("textures/motherFly");
-            Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
-            // TODO: use this.Content to load your game content here
             manager = new StateManager();
         }
 
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
         }
 
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) || Globals.exit)
                 Exit();
-
             manager.Update();
-            // TODO: Add your update logic here
-
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-
-
-            // TODO: Add your drawing code here
-            //manager.splashComponent.Draw();
             base.Draw(gameTime);
         }
     }
