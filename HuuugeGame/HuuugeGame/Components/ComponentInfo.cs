@@ -37,7 +37,7 @@ namespace HuuugeGame.Components
             Globals.spriteBatch.DrawString(Globals.defaultFont, "press to place a web", new Vector2(Globals.screenSize.X / 4 - 75, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 70), Color.White);
             Globals.spriteBatch.DrawString(Globals.defaultFont, "Target: Eat every small butterflies", new Vector2(Globals.screenSize.X / 4 - 115, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 190), Color.White);
             Globals.spriteBatch.DrawString(Globals.defaultFont, "Target: Collect as many\nbutterflies as possible", new Vector2((Globals.screenSize.X / 4)*3 - 75, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 70), Color.White);
-            Globals.spriteBatch.DrawString(Globals.defaultFont, "Take the flowers", new Vector2((Globals.screenSize.X / 4)*3 - 75, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 140), Color.White);
+            Globals.spriteBatch.DrawString(Globals.defaultFont, "Pick up the flowers", new Vector2((Globals.screenSize.X / 4)*3 - 75, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 140), Color.White);
             Globals.spriteBatch.Draw(Globals.flowerTexture, new Rectangle(((int)Globals.screenSize.X / 4)*3 + 70, 100 + Globals.spiderStaticTexture.Height * 2 + Globals.wsadIMG.Height + 135, Globals.flowerTexture.Width, Globals.flowerTexture.Height), Color.White);
 
             Globals.spriteBatch.Draw(Globals.arrowsIMG, new Rectangle(((int)Globals.screenSize.X / 4)*3 - Globals.arrowsIMG.Width/2, (100 + Globals.motherFlyStaticTexture.Height * 2+40), Globals.arrowsIMG.Width, Globals.arrowsIMG.Height),Color.White);
