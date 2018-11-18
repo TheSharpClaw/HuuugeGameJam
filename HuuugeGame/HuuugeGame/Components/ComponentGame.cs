@@ -21,12 +21,17 @@ namespace HuuugeGame
         //LOAD OBJECTS AND OTHER STUFF IMPORTANT FOR THE GAMESTATE
         public void OnLoad()
         {
-            DrawList.Add(new Spider(new Vector2(32, 32), new Vector2(100, 100), 3));
-            DrawList.Add(new Hive(200));
-            DrawList.Add(new Hive(100));
-            DrawList.Insert(0, new Flower(DrawList));
+            var hive = new Hive(this, new Vector2(500,500), 200);
+
+            DrawList.Add(new Spider(this, new Vector2(32, 32), new Vector2(100, 100), 3));
+            DrawList.Add(hive);
+            DrawList.Insert(0, new Flower(this, new Vector2(300,300), hive));
+
+
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
+
+
         }
 
         //OBLICZENIA
