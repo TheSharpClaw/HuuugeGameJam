@@ -64,6 +64,8 @@ namespace HuuugeGame.Behaviour.Hive
 
             this.hive = hive;
 
+            velocity = Globals.RandomBitches.Next(velocity, velocity + 1);
+
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
             // BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
