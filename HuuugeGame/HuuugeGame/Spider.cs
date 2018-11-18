@@ -13,14 +13,14 @@ namespace HuuugeGame
 {
     class Spider : IEntity
     {
-        public AnimatedSprite animatedSprite; 
+        public AnimatedSprite animatedSprite;
         public int spiderWebPower;
 
         public Spider(IComponent stage, Vector2 size, Vector2 position, int velocity)
         {
             this.stage = stage;
             Position = position;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width/2, Texture.Height/2);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width / 2, Texture.Height / 2);
             Velocity = velocity;
             spiderWebPower = 30;
             animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
@@ -38,6 +38,8 @@ namespace HuuugeGame
         public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
 
+        private Color color = Color.Gray;
+
         KeyboardState oldKeyState;
         KeyboardState newKeyState;
 
@@ -49,7 +51,7 @@ namespace HuuugeGame
             //Globals.spriteBatch.Draw(Globals.spiderTexture, new Vector2(Position.X + Size.X / 2, Position.Y + Size.Y / 2),
             //    null, Color.Black, angle, origin, 1.0f, SpriteEffects.None, 1);
 
-            animatedSprite.Draw(Position, angle, Color.Gray);
+            animatedSprite.Draw(Position, angle, color);
 
             #region drawSpiderWebPower
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Position.X - 10, (int)Position.Y - 20, 50, Globals.hpBar.Height), Color.White);
@@ -68,14 +70,14 @@ namespace HuuugeGame
         {
             var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
 
-            if(keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))
+            if (keys.Contains(Keys.W) || keys.Contains(Keys.S) || keys.Contains(Keys.A) || keys.Contains(Keys.D))
             {
-                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width/2, Texture.Height/2);
-                if (counterTimer % 6 == 0) 
+                BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width / 2, Texture.Height / 2);
+                if (counterTimer % 6 == 0)
                     animatedSprite.Update();
             }
-            
-            List<ChildrenFly> ListOfChildrenFlies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies;                 
+
+            List<ChildrenFly> ListOfChildrenFlies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies;
             ListOfChildrenFlies.RemoveAll(x => x.BoundingBox.Intersects(BoundingBox));
 
             if (counterTimer++ > (60 * 2))
@@ -86,12 +88,12 @@ namespace HuuugeGame
                 }
                 counterTimer = 0;
             }
-            
+
             newKeyState = Keyboard.GetState();
             SpiderControls();
             SpiderCollision();
             oldKeyState = newKeyState;
-            for(int i=0;i<spiderWebList.Count;i++)
+            for (int i = 0; i < spiderWebList.Count; i++)
             {
                 spiderWebList[i].Update();
             }
@@ -187,13 +189,13 @@ namespace HuuugeGame
             {
                 if (spiderWebPower > 0)
                 {
-                    spiderWebList.Add(new SpidersWeb(stage, Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 12,spiderWebList));
+                    spiderWebList.Add(new SpidersWeb(stage, Position, new Vector2(Globals.spiderWebTexture.Width, Globals.spiderWebTexture.Height), 12, spiderWebList));
                     spiderWebPower -= 10;
                 }
             }
             #endregion
         }
-
+        
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
@@ -203,6 +205,49 @@ namespace HuuugeGame
             if (Position.Y < 24) Position = new Vector2(Position.X, 24);
 
             else if (Position.Y + BoundingBox.Height > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - BoundingBox.Height);
+
+            var obstacles = stage.DrawList.FindAll(x => x is Obstacle).ToList();
+
+            if ((obstacles = obstacles.FindAll(x => x.BoundingBox.Intersects(BoundingBox))).Count > 0)
+            {
+                foreach (var item in obstacles)
+                {
+                    var top = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Top), new Point(item.BoundingBox.Width, 0));
+
+                    if (BoundingBox.Intersects(top))
+                    {
+                        Position = new Vector2(Position.X, top.Top - BoundingBox.Height);
+                    }
+
+
+
+                    var bottom = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Bottom), new Point(item.BoundingBox.Width, 0));
+
+                    if (BoundingBox.Intersects(bottom))
+                    {
+                        Position = new Vector2(Position.X, bottom.Bottom);
+                    }
+
+
+
+                    var left = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
+
+                    if (BoundingBox.Intersects(left))
+                    {
+                        Position = new Vector2(left.Left - BoundingBox.Width, Position.Y);
+                    }
+
+
+
+                    var right = new Rectangle(new Point(item.BoundingBox.Right, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
+
+                    if (BoundingBox.Intersects(right))
+                    {
+                        Position = new Vector2(right.Right, Position.Y);
+                    }
+
+                }
+            }
         }
     }
 }
