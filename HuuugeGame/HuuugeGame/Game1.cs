@@ -73,6 +73,8 @@ namespace HuuugeGame
             Globals.holeTexture = Content.Load<Texture2D>("textures/hole_texture");
             Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
 
+            Globals.battleBackgroundMusic = Content.Load<Song>("sounds/battle_background_music");
+
             Globals.wilhelmScreamSE = Content.Load<SoundEffect>("sounds/Wilhelm_scream");
 
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
