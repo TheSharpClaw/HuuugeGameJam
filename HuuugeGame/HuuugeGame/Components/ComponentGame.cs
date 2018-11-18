@@ -13,7 +13,7 @@ namespace HuuugeGame
 {
     class ComponentGame : StateTemplate, Behaviour.IComponent
     {
-        private int i;
+        private int counter1,counter2;
         private bool isLoaded = false;
         public List<IEntity> DrawList { get; set; } = new List<IEntity>();
         public List<IEntity> UpdateList { get; set; } = new List<IEntity>();
@@ -43,10 +43,15 @@ namespace HuuugeGame
                 UpdateList[i].Update();
             }
             Draw();
+
+
+
+            //FLOWER
             if (!IfDrawListHasFlower())
             {
-                if (i< 60 * 3)
-                     i++;
+                counter2 = 0;
+                if (counter1< 60 * 3)
+                     counter1++;
                   else
                 {
                     DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
@@ -55,7 +60,15 @@ namespace HuuugeGame
             }
             else
             {
-                i= 0;
+                counter1= 0;
+                if (counter2 < 60 * 8)
+                    counter2++;
+                else
+                {
+                    counter2 = 0;
+                    DrawList.Remove(DrawList.Find(x=>x is Flower));
+                    DrawList.Insert(0, new Flower(this, GenerateNewPositionForFlower()));
+                }
             }
         }
 

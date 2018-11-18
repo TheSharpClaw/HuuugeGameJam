@@ -29,8 +29,6 @@ namespace HuuugeGame
         public Flower(IComponent stage, Vector2 position)
         {
             this.stage = stage;
-
-
             Position = position;
             updateBoundingBox();
         }
