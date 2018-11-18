@@ -24,7 +24,7 @@ namespace HuuugeGame
 
             DrawList.Add(new Spider(this, new Vector2(32, 32), new Vector2(100, 100), 3));
             DrawList.Add(hive);
-            DrawList.Insert(0, new Flower(this, new Vector2(300,300), hive));
+            DrawList.Insert(0, new Flower(this, new Vector2(300,300)));
 
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
@@ -39,9 +39,10 @@ namespace HuuugeGame
                 isLoaded = true;
             }
 
-            foreach (IEntity entity in UpdateList)
-                entity.Update();
-
+            for (int i = 0; i < UpdateList.Count(); i++)
+            {
+                UpdateList[i].Update();
+            }
             Draw();
         }
 

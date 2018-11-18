@@ -32,6 +32,16 @@ namespace HuuugeGame
             Globals.graphics.PreferredBackBufferHeight = 600;
             Globals.graphics.ApplyChanges();
 
+
+            base.Initialize();
+        }
+
+        /// <summary>
+        /// LoadContent will be called once per game and is the place to load
+        /// all of your content.
+        /// </summary>
+        protected override void LoadContent()
+        {
             Globals.defaultFont = Content.Load<SpriteFont>("DefaultFont");
 
             Globals.splashScreenLogo = Content.Load<Texture2D>("images/splash_logo");
@@ -56,15 +66,6 @@ namespace HuuugeGame
             Globals.stone3Texture = Content.Load<Texture2D>("textures/stone3_texture");
             Globals.stone4Texture = Content.Load<Texture2D>("textures/stone4_texture");
 
-            base.Initialize();
-        }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);
             manager = new StateManager();

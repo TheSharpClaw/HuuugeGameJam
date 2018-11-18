@@ -15,7 +15,7 @@ namespace HuuugeGame
     {
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; } = Globals.flowerTexture;
-        public Rectangle Rectangle { get; set; }
+        public Rectangle BoundingBox { get; set; }
 
         public IComponent stage { get; private set; }
 
@@ -25,39 +25,32 @@ namespace HuuugeGame
         int incrementX = 0;
         int incrementY = 0;
 
-        Hive hive;
 
-        public Flower(IComponent stage, Vector2 position, Hive hive)
+        public Flower(IComponent stage, Vector2 position)
         {
             this.stage = stage;
 
-            this.hive = hive;
 
             Position = position;
-            Rectangle = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+            BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
         }
 
         public void Draw()
         {       
-            Globals.spriteBatch.Draw(Texture, Rectangle, Color.White);  
+            Globals.spriteBatch.Draw(Texture, BoundingBox, Color.White);  
         }
 
         public void Update()
         {
-            if (Rectangle.Intersects(hive.Rectangle))
-            {
-                stage.DrawList.Remove(this);
-            }
-
             if (incrementX < sizeX)
             {
                 incrementX++;
-                Rectangle = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+                BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
             }
             if (incrementY < sizeY)
             {
                 incrementY++;
-                Rectangle = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+                BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
             }           
         } 
     }

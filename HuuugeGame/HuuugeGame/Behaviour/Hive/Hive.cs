@@ -19,9 +19,9 @@ namespace HuuugeGame.Behaviour.Hive
 
         public Texture2D Texture { get; set; } = Globals.motherFlyTexture;
 
-        public Rectangle Rectangle { get; set; }
+        public Rectangle BoundingBox { get; set; }
 
-        public Vector2 Center { get => new Vector2(Position.X + Globals.motherFlyTexture.Width / 2, Position.Y + Globals.motherFlyTexture.Height / 2); }
+        public Vector2 Center { get => BoundingBox.Center.ToVector2(); }
 
         public int minRadious { get; } = 30;
 
@@ -41,7 +41,7 @@ namespace HuuugeGame.Behaviour.Hive
             this.stage = stage;
 
             Position = position;
-            Rectangle = Texture.Bounds;
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
 
             for (int i = 0; i < offsprings; i++)
                 ChildrenFlies.Add(new ChildrenFly(this.stage, this));
@@ -50,6 +50,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
             var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
 
             if (counterTimer++ % 6 == 0) animatedSprite.Update();
@@ -62,8 +63,7 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Draw()
         {
-            animatedSprite.Draw(new Vector2(Center.X - Globals.motherFlyTexture.Width / 4, Center.Y - Globals.motherFlyTexture.Height / 4), angle, Color.White);
-
+            animatedSprite.Draw(Position, angle, Color.White);
             foreach (ChildrenFly fly in ChildrenFlies)
                 fly.Draw();
         }
@@ -159,10 +159,26 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void HiveCollision()
         {
+            //GAMESPACE
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
             else if (Position.X + Size.X > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - Size.X, Position.Y);
             if (Position.Y < 24) Position = new Vector2(Position.X, 24);
             else if (Position.Y + Size.Y > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - Size.Y);
+
+            //FLOWER COLLISION
+            //Flower flo = stage.DrawList.IndexOf()
+            for(int i = 0; i < stage.DrawList.Count(); i++)
+            {
+                if(stage.DrawList[i] is Flower) {
+                    if (stage.DrawList[i].BoundingBox.Intersects(this.BoundingBox))
+                    {
+                        stage.DrawList.Remove(stage.DrawList[i]);
+                        //TODO: add more flies
+                    }
+                    break;
+                }
+
+            }
         }
     }
 }

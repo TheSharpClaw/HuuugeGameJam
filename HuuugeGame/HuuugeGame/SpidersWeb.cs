@@ -15,7 +15,7 @@ namespace HuuugeGame
         {
             Position = position;
 
-            Rectangle = Texture.Bounds;
+            BoundingBox = Texture.Bounds;
 
             this.stage = stage;
             Size = size;
@@ -31,7 +31,7 @@ namespace HuuugeGame
         public int Power { get; set; }
 
         public Texture2D Texture { get; set; } = Globals.spiderWebTexture;
-        public Rectangle Rectangle { get; set; }
+        public Rectangle BoundingBox { get; set; }
 
         public IComponent stage { get; private set; }
 

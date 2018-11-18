@@ -13,7 +13,7 @@ namespace HuuugeGame.Behaviour.Hive
     {
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; } = Globals.childrenFlyTexture;
-        public Rectangle Rectangle { get; set; }
+        public Rectangle BoundingBox { get; set; }
         public IComponent stage { get; private set;  }
 
         private Hive hive;
@@ -59,7 +59,7 @@ namespace HuuugeGame.Behaviour.Hive
 
             Position = hive.Position + new Vector2(Globals.RandomBitches.Next(-100, 100), Globals.RandomBitches.Next(-100, 100));
             childColor = ColorsArray[Globals.RandomBitches.Next(0, ColorsArray.Length - 1)];
-            Rectangle = Texture.Bounds;
+            BoundingBox = Texture.Bounds;
 
         }
 

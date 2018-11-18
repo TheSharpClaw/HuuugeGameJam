@@ -20,7 +20,7 @@ namespace HuuugeGame
             this.stage = stage;
             Size = size;
             Position = position;
-            Rectangle = Texture.Bounds;
+            BoundingBox = Texture.Bounds;
             Velocity = velocity;
             spiderWebPower = 30;
             animatedSprite = new AnimatedSprite(Globals.spiderTexture, 2, 2);
@@ -32,7 +32,7 @@ namespace HuuugeGame
         public int Velocity { get; set; }
         public Vector2 Position { get; set; }
         public Texture2D Texture { get; set; } = Globals.spiderTexture;
-        public Rectangle Rectangle { get; set; }
+        public Rectangle BoundingBox { get; set; }
 
         public IComponent stage { get; private set; }
 
