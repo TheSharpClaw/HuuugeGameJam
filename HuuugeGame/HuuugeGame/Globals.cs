@@ -43,7 +43,7 @@ namespace HuuugeGame
         public static Texture2D stone4Texture;
 
 
-        public static enGameStates activeState = enGameStates.SPLASH;
+        public static enGameStates activeState = enGameStates.INFO;
         public enum enGameStates
         {
             SPLASH,
@@ -52,7 +52,8 @@ namespace HuuugeGame
             PAUSE,
             TEST,
             EXIT,
-            WINSTATE
+            WINSTATE,
+            INFO
         }
 
     }

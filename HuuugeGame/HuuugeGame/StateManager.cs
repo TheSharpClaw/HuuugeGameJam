@@ -14,6 +14,7 @@ namespace HuuugeGame
         ComponentSplash splashComponent = new ComponentSplash();
         ComponentTest testComponent = new ComponentTest();
         ComponentWinState winStateComponent = new ComponentWinState();
+        ComponentInfo componentInfo = new ComponentInfo();
         public void Update()
         {
             //TU SIE DZIEJE INTERPRETACJA STANÓW
@@ -38,6 +39,9 @@ namespace HuuugeGame
                     break;
                 case Globals.enGameStates.WINSTATE:
                     winStateComponent.Update();
+                    break;
+                case Globals.enGameStates.INFO:
+                    componentInfo.Update();
                     break;
             }
         }

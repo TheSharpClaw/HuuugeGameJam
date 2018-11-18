@@ -46,6 +46,7 @@
     <Compile Include="Behaviour\IComponent.cs" />
     <Compile Include="Components\AnimatedSprite.cs" />
     <Compile Include="Components\ComponentGame.cs" />
+    <Compile Include="Components\ComponentInfo.cs" />
     <Compile Include="Components\ComponentMenu.cs" />
     <Compile Include="Components\ComponentSplash.cs" />
     <Compile Include="Behaviour\IEntity.cs" />
