@@ -242,7 +242,7 @@ namespace HuuugeGame
                     var right = new Rectangle(new Point(item.BoundingBox.Right, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
 
                     if (BoundingBox.Right > left.Left &&
-                        BoundingBox.Left < left.Left &&
+                        BoundingBox.Left < left.Left && 
                         BoundingBox.Bottom > top.Top &&
                         BoundingBox.Top < bottom.Bottom)
                     {
@@ -276,16 +276,6 @@ namespace HuuugeGame
                         BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, BoundingBox.Width, BoundingBox.Height);
 
                     }
-
-
-
-                    var right = new Rectangle(new Point(item.BoundingBox.Right, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
-
-                    if (BoundingBox.Intersects(right))
-                    {
-                        Position = new Vector2(right.Right, Position.Y);
-                    }
-
                 }
             }
         }
