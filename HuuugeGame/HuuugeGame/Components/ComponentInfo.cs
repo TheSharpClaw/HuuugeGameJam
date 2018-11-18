@@ -28,7 +28,7 @@ namespace HuuugeGame.Components
             Globals.spriteBatch.Begin();
             Globals.spriteBatch.Draw(Globals.backgroundTexture, new Vector2(0, 0), Color.White);
             Globals.spriteBatch.Draw(Globals.hpBar, new Rectangle((int)Globals.screenSize.X/2-Globals.hpBar.Width, 47, 132, 22), new Color(0, 0, 0, 150));
-            Globals.spriteBatch.DrawString(Globals.defaultFont, "STEROWANIE", new Vector2(Globals.screenSize.X/2-50, 50), Color.White);
+            Globals.spriteBatch.DrawString(Globals.defaultFont, "CONTROL", new Vector2(Globals.screenSize.X/2-50, 50), Color.White);
             Globals.spriteBatch.Draw(Globals.spiderStaticTexture, new Rectangle((int)Globals.screenSize.X / 4 - Globals.spiderStaticTexture.Width, 100, Globals.spiderStaticTexture.Width * 2, Globals.spiderStaticTexture.Height * 2), Color.White);
             Globals.spriteBatch.Draw(Globals.motherFlyStaticTexture, new Rectangle(((int)Globals.screenSize.X / 4) * 3 - Globals.motherFlyStaticTexture.Width, 100, Globals.motherFlyStaticTexture.Width * 2, Globals.motherFlyStaticTexture.Height * 2), Color.White);
             Globals.spriteBatch.Draw(Globals.wsadIMG, new Rectangle(((int)Globals.screenSize.X / 4) - Globals.wsadIMG.Width/2, (100 + Globals.spiderStaticTexture.Height * 2+40), Globals.wsadIMG.Width, Globals.wsadIMG.Height),Color.White);
