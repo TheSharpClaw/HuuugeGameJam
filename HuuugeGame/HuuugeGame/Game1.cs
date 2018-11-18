@@ -60,9 +60,9 @@ namespace HuuugeGame
 
             Globals.flowerTexture = Content.Load<Texture2D>("textures/flower_texture");
 
-            Globals.wsadIMG = Content.Load<Texture2D>("images/wsad");
-            Globals.arrowsIMG = Content.Load<Texture2D>("images/wsad");
-            Globals.shiftIMG = Content.Load<Texture2D>("images/wsad");
+            Globals.wsadIMG = Content.Load<Texture2D>("images/keys_WSAD");
+            Globals.arrowsIMG = Content.Load<Texture2D>("images/keys_arrows");
+            Globals.shiftIMG = Content.Load<Texture2D>("images/key_shift");
 
             Globals.stumpTexture = Content.Load<Texture2D>("textures/stump_texture");
             Globals.stone1Texture = Content.Load<Texture2D>("textures/stone1_texture");
