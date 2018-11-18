@@ -41,7 +41,7 @@ namespace HuuugeGame.Behaviour.Hive
             this.stage = stage;
 
             Position = position;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            BoundingBox = new Rectangle(Position.ToPoint(), BoundingBox.Size);
 
             for (int i = 0; i < offsprings; i++)
                 ChildrenFlies.Add(new ChildrenFly(this.stage, this));
@@ -50,7 +50,8 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, (int)Size.X, (int)Size.Y);
+            BoundingBox = new Rectangle(Position.ToPoint(), BoundingBox.Size);
+
             var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
 
             if (counterTimer++ % 6 == 0) animatedSprite.Update();
@@ -161,12 +162,15 @@ namespace HuuugeGame.Behaviour.Hive
         {
             //GAMESPACE
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
-            else if (Position.X + Size.X > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - Size.X, Position.Y);
+
+            else if (Position.X + BoundingBox.Width > Globals.screenSize.X - 24) Position = new Vector2(Globals.screenSize.X - 24 - BoundingBox.Width, Position.Y);
+
             if (Position.Y < 24) Position = new Vector2(Position.X, 24);
-            else if (Position.Y + Size.Y > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - Size.Y);
+
+            else if (Position.Y + BoundingBox.Height > Globals.screenSize.Y - 24) Position = new Vector2(Position.X, Globals.screenSize.Y - 24 - BoundingBox.Height);
 
             //FLOWER COLLISION         
-            for(int i = 0; i < stage.DrawList.Count(); i++)
+            for (int i = 0; i < stage.DrawList.Count(); i++)
             {
                 if(stage.DrawList[i] is Flower) {
                     if (stage.DrawList[i].BoundingBox.Intersects(this.BoundingBox))
