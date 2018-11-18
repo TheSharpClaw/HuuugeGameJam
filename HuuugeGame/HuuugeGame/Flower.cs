@@ -29,10 +29,13 @@ namespace HuuugeGame
         public Flower(IComponent stage, Vector2 position)
         {
             this.stage = stage;
-
-
             Position = position;
-            BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+            updateBoundingBox();
+        }
+
+        private void updateBoundingBox()
+        {
+            BoundingBox = new Rectangle((int)Position.X - (incrementX / 2), (int)Position.Y - (incrementY / 2), incrementX, incrementY);
         }
 
         public void Draw()
@@ -45,12 +48,12 @@ namespace HuuugeGame
             if (incrementX < sizeX)
             {
                 incrementX++;
-                BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+                updateBoundingBox();
             }
             if (incrementY < sizeY)
             {
                 incrementY++;
-                BoundingBox = new Rectangle(400 - (incrementX / 2), 400 - (incrementY / 2), incrementX, incrementY);
+                updateBoundingBox();
             }           
         } 
     }
