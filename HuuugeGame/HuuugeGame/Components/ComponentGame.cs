@@ -22,7 +22,9 @@ namespace HuuugeGame
         public void OnLoad()
         {
             DrawList.Add(new Spider(new Vector2(32, 32), new Vector2(100, 100), 3));
+            DrawList.Add(new Hive(200));
             DrawList.Add(new Hive(100));
+            DrawList.Insert(0, new Flower(DrawList));
             //HACK: Do rozróżnienia?
             UpdateList = DrawList;
         }
@@ -54,5 +56,6 @@ namespace HuuugeGame
             }
             Globals.spriteBatch.End();
         }
+    
     }
 }
