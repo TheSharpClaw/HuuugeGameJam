@@ -47,7 +47,7 @@ namespace HuuugeGame
             Collision();
             if (--_spiderWebLife == 0)
             {
-                for (int i = 0; i < stage.DrawList.Count; i++)
+                          for (int i = 0; i < stage.DrawList.Count; i++)
                 {
                     if (stage.DrawList[i] is Hive)
                     {
@@ -57,6 +57,7 @@ namespace HuuugeGame
                             if (x.ChildrenFlies[j].BoundingBox.Intersects(BoundingBox))
                             {
                                 x.ChildrenFlies.Remove(x.ChildrenFlies[j]);
+                              
                             }
                         }
                     }
