@@ -53,9 +53,11 @@ namespace HuuugeGame
             Globals.hpBar_white = Content.Load<Texture2D>("textures/hp_bar_white");
 
             Globals.motherFlyTexture = Content.Load<Texture2D>("textures/mother_butterfly_texture");
+            Globals.motherFlyStaticTexture = Content.Load<Texture2D>("textures/mother_butterfly_static_texture");
             Globals.childrenFlyTexture = Content.Load<Texture2D>("textures/children_butterfly_texture");
 
             Globals.spiderTexture = Content.Load<Texture2D>("textures/spider_texture");
+            Globals.spiderStaticTexture = Content.Load<Texture2D>("textures/spider_static_texture");
             Globals.spiderWebTexture = Content.Load<Texture2D>("textures/spider_web_texture");
 
             Globals.flowerTexture = Content.Load<Texture2D>("textures/flower_texture");
