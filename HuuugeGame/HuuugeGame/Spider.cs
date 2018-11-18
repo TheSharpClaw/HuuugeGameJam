@@ -195,7 +195,7 @@ namespace HuuugeGame
             }
             #endregion
         }
-        
+
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);
@@ -213,38 +213,79 @@ namespace HuuugeGame
                 foreach (var item in obstacles)
                 {
                     var top = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Top), new Point(item.BoundingBox.Width, 0));
-
-                    if (BoundingBox.Intersects(top))
-                    {
-                        Position = new Vector2(Position.X, top.Top - BoundingBox.Height);
-                    }
-
-
-
                     var bottom = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Bottom), new Point(item.BoundingBox.Width, 0));
-
-                    if (BoundingBox.Intersects(bottom))
-                    {
-                        Position = new Vector2(Position.X, bottom.Bottom);
-                    }
-
-
-
                     var left = new Rectangle(new Point(item.BoundingBox.Left, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
-
-                    if (BoundingBox.Intersects(left))
-                    {
-                        Position = new Vector2(left.Left - BoundingBox.Width, Position.Y);
-                    }
-
-
-
                     var right = new Rectangle(new Point(item.BoundingBox.Right, item.BoundingBox.Top), new Point(0, item.BoundingBox.Height));
 
-                    if (BoundingBox.Intersects(right))
+                    if (BoundingBox.Right > left.Left &&
+                        BoundingBox.Left < left.Left &&
+                        BoundingBox.Bottom > top.Top &&
+                        BoundingBox.Top < bottom.Bottom)
                     {
-                        Position = new Vector2(right.Right, Position.Y);
+                        Position = new Vector2(Position.X -Velocity, Position.Y);
+                        BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, BoundingBox.Width, BoundingBox.Height);
                     }
+                     if (BoundingBox.Bottom > top.Top &&
+                        BoundingBox.Top < top.Top &&
+                        BoundingBox.Right > left.Left &&
+                        BoundingBox.Left < right.Right)
+                    {
+                        Position = new Vector2(Position.X, Position.Y - Velocity);
+                        BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, BoundingBox.Width, BoundingBox.Height);
+
+                    }
+                    if (BoundingBox.Left < right.Right &&
+                       BoundingBox.Right > right.Right &&
+                       BoundingBox.Bottom > top.Top &&
+                       BoundingBox.Top < bottom.Bottom)
+                    {
+                        Position = new Vector2(Position.X + Velocity, Position.Y);
+                        BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, BoundingBox.Width, BoundingBox.Height);
+
+                    }
+                    if (BoundingBox.Top < bottom.Bottom &&
+                        BoundingBox.Bottom > bottom.Bottom &&
+                        BoundingBox.Right > left.Left &&
+                        BoundingBox.Left < right.Right)
+                    {
+                        Position = new Vector2(Position.X, Position.Y + Velocity);
+                        BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, BoundingBox.Width, BoundingBox.Height);
+
+                    }
+
+
+                    //if (BoundingBox.Intersects(top) && BoundingBox.Intersects(right))
+                    //{
+                    //    Position = new Vector2(right.Right, top.Top - BoundingBox.Height);
+                    //}
+                    //else if (BoundingBox.Intersects(top) && BoundingBox.Intersects(left))
+                    //{
+                    //    Position = new Vector2(left.Left - BoundingBox.Width, top.Top - BoundingBox.Height);
+                    //}
+                    //else if (BoundingBox.Intersects(bottom) && BoundingBox.Intersects(left))
+                    //{
+                    //    Position = new Vector2(left.Left - BoundingBox.Width, bottom.Bottom);
+                    //}
+                    //else if (BoundingBox.Intersects(bottom) && BoundingBox.Intersects(right))
+                    //{
+                    //    Position = new Vector2(right.Right, bottom.Bottom);
+                    //}
+                    //else if (BoundingBox.Intersects(top))
+                    //{
+                    //    Position = new Vector2(Position.X, top.Top - BoundingBox.Height);
+                    //}
+                    //else if (BoundingBox.Intersects(bottom))
+                    //{
+                    //    Position = new Vector2(Position.X, bottom.Bottom);
+                    //}
+                    //else if (BoundingBox.Intersects(left))
+                    //{
+                    //    Position = new Vector2(left.Left - BoundingBox.Width, Position.Y);
+                    //}
+                    //else if (BoundingBox.Intersects(right))
+                    //{
+                    //    Position = new Vector2(right.Right, Position.Y);
+                    //}
 
                 }
             }
