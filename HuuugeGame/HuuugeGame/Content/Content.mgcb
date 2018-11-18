@@ -157,7 +157,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:textures/mother_butterfly_texture.png;textures/motherFly.png
+/build:textures/mother_butterfly_texture.png
 
 #begin textures/spider_texture.png
 /importer:TextureImporter

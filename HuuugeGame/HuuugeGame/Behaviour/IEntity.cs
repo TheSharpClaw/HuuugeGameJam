@@ -14,7 +14,7 @@ namespace HuuugeGame.Content.Behaviour
 
         Texture2D Texture { get; set; }
 
-        Rectangle Rectangle { get; set; }
+        Rectangle BoundingBox { get; set; }
 
         HuuugeGame.Behaviour.IComponent stage { get; }
 
