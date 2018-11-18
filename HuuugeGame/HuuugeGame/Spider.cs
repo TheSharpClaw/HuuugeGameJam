@@ -38,6 +38,9 @@ namespace HuuugeGame
         public List<SpidersWeb> spiderWebList = new List<SpidersWeb>();
         private float angle = 0;
 
+        private int killSEDelay = 0;
+        private int stepSEDelay = 0;
+
         private Color color = Color.Gray;
 
         KeyboardState oldKeyState;
@@ -76,9 +79,15 @@ namespace HuuugeGame
                 if (counterTimer % 6 == 0)
                     animatedSprite.Update();
             }
-
-            List<ChildrenFly> ListOfChildrenFlies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies;
-            ListOfChildrenFlies.RemoveAll(x => x.BoundingBox.Intersects(BoundingBox));
+            
+            List<ChildrenFly> ListOfChildrenFlies = ((Hive)stage.DrawList.Find(x => x is Hive)).ChildrenFlies;                 
+            var count = ListOfChildrenFlies.RemoveAll(x => x.BoundingBox.Intersects(BoundingBox));
+            if(count >= 1 && killSEDelay >= 15)
+            {
+                Globals.wilhelmScreamSE.Play(0.5f, 0.4f, 1);
+                killSEDelay = 0;
+            }
+            killSEDelay++;
 
             if (counterTimer++ > (60 * 2))
             {
@@ -102,6 +111,11 @@ namespace HuuugeGame
         public void SpiderControls()
         {
             var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
+
+            if (keys.Contains(Keys.A) || keys.Contains(Keys.D) ||keys.Contains(Keys.W) ||keys.Contains(Keys.S))
+            {
+                playStepSE();
+            }
 
             if (keys.Contains(Keys.A) && keys.Contains(Keys.D))
             {
@@ -195,7 +209,17 @@ namespace HuuugeGame
             }
             #endregion
         }
-        
+
+        private void playStepSE()
+        {
+            if(stepSEDelay >= 20)
+            {
+                Globals.stepSE.Play(0.25f, 0.1f, 1);
+                stepSEDelay = 0;
+            }
+            stepSEDelay++;
+        }
+
         public void SpiderCollision()
         {
             if (Position.X < 24) Position = new Vector2(24, Position.Y);

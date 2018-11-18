@@ -76,8 +76,12 @@ namespace HuuugeGame
             Globals.bushTexture = Content.Load<Texture2D>("textures/brush_texture");
 
             Globals.battleBackgroundMusic = Content.Load<Song>("sounds/battle_background_music");
+            MediaPlayer.Volume = 0.05f;
+            MediaPlayer.Play(Globals.battleBackgroundMusic);
 
             Globals.wilhelmScreamSE = Content.Load<SoundEffect>("sounds/Wilhelm_scream");
+            Globals.stepSE = Content.Load<SoundEffect>("sounds/stepSE");
+            Globals.victorySoundEffect = Content.Load<SoundEffect>("sounds/victorySoundEffect");
 
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.screenSize = new Vector2(Globals.graphics.PreferredBackBufferWidth, Globals.graphics.PreferredBackBufferHeight);

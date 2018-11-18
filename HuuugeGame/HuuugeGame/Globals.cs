@@ -57,6 +57,8 @@ namespace HuuugeGame
         public static Song battleBackgroundMusic;
 
         public static SoundEffect wilhelmScreamSE;
+        public static SoundEffect stepSE;
+        public static SoundEffect victorySoundEffect;
 
         public static KeyboardState oldKeyState;
         public static KeyboardState newKeyState;

@@ -173,6 +173,7 @@ namespace HuuugeGame.Behaviour.Hive
                     if (stage.DrawList[i].BoundingBox.Intersects(this.BoundingBox))
                     {
                         stage.DrawList.Remove(stage.DrawList[i]);
+                        
                         //FLOWER - EATEN = ADD 10 SMALL BITCHES
                         for (int k = 0; k < 10; k++)
                             ChildrenFlies.Add(new ChildrenFly(this.stage, this));
