@@ -41,7 +41,7 @@ namespace HuuugeGame.Behaviour.Hive
             this.stage = stage;
 
             Position = position;
-            BoundingBox = new Rectangle(Position.ToPoint(), BoundingBox.Size);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width / 2, Texture.Height / 2);
 
             for (int i = 0; i < offsprings; i++)
                 ChildrenFlies.Add(new ChildrenFly(this.stage, this));
@@ -50,13 +50,10 @@ namespace HuuugeGame.Behaviour.Hive
 
         public void Update()
         {
-            BoundingBox = new Rectangle(Position.ToPoint(), BoundingBox.Size);
-
-            var keys = Keyboard.GetState().GetPressedKeys().Cast<Keys>().ToList();
-
             if (counterTimer++ % 6 == 0) animatedSprite.Update();
 
             HiveControls();
+            BoundingBox = new Rectangle(Position.ToPoint(), BoundingBox.Size);
             HiveCollision();
             foreach (var fly in ChildrenFlies)
                 fly.Update();
